@@ -50,6 +50,7 @@ public class Main {
 			// 메뉴 번호 입력
 			System.out.print("\n메뉴를 입력하세요 : ");
 			menuNum = scan.nextInt();
+			scan.nextLine();
 
 			if (menuNum == 1) {
 				boolean res = login();
@@ -65,6 +66,7 @@ public class Main {
 						System.out.print("\n메뉴를 입력하세요 : ");
 
 						subMenuNum = scan.nextInt();
+						scan.nextLine();
 
 						if (subMenuNum == 1) {
 
@@ -96,6 +98,7 @@ public class Main {
 						System.out.print("\n메뉴를 입력하세요 : ");
 
 						subMenuNum = scan.nextInt();
+						scan.nextLine();
 
 						if (subMenuNum == 1) {
 
