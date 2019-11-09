@@ -30,6 +30,7 @@ public class Main {
 		// Make a connection
 		try {
 			conn = DriverManager.getConnection(URL, USER_NAME, USER_PASSWD);
+			conn.setAutoCommit(false);
 		} catch (SQLException e) {
 			System.err.println("Cannot get a connection: " + e.getMessage());
 			System.exit(1);
@@ -44,80 +45,88 @@ public class Main {
 
 			Scanner scan = new Scanner(System.in);
 			int menuNum;
+			int subMenuNum;
 
 			// 메뉴 번호 입력
 			System.out.print("\n메뉴를 입력하세요 : ");
 			menuNum = scan.nextInt();
 
-			switch (menuNum) {
-			case 1:
+			if (menuNum == 1) {
 				boolean res = login();
+
 				if (res == true && admin == false) {
 					// menu 1-1 수행
-					System.out.println("1. 회원 정보 관리");
-					System.out.println("2. 차량 관리");
-					System.out.println("3. 거래 내역");
-					System.out.println("4. 돌아가기");
-					System.out.println("\n메뉴를 입력하세요 : ");
+					while(true) {
+						
+						System.out.println("1. 회원 정보 관리");
+						System.out.println("2. 차량 관리");
+						System.out.println("3. 거래 내역");
+						System.out.println("4. 로그아웃");
+						System.out.print("\n메뉴를 입력하세요 : ");
 
-					menuNum = scan.nextInt();
+						subMenuNum = scan.nextInt();
 
-					switch (menuNum) {
-					case 1:
+						if (subMenuNum == 1) {
 
-						break;
-					case 2:
+						} else if (subMenuNum == 2) {
 
-						break;
-					case 3:
+						} else if (subMenuNum == 3) {
 
-						break;
-					case 4:
-						break;
-					default:
-						System.out.println("잘못된 입력입니다!");
+						} else if (subMenuNum == 4) {
+							Main.id = null;
+							Main.admin = false;
+							res = false;
+							System.out.println("로그아웃 하셨습니다!");
+							break;
+						} else {
+							System.out.println("잘못된 입력입니다!");
+						}
+						
 					}
+
 				} else if (res == true && admin == true) {
-					// menu 1-2 수헹
-					System.out.println("1. 회원 정보 관리");
-					System.out.println("2. 차량 관리");
-					System.out.println("3. 거래 내역");
-					System.out.println("4. 관리자 기능");
-					System.out.println("5. 돌아가기");
-					System.out.println("\n메뉴를 입력하세요 : ");
 
-					menuNum = scan.nextInt();
+					while (true) {
+						// menu 1-2 수헹
+						System.out.println("1. 회원 정보 관리");
+						System.out.println("2. 차량 관리");
+						System.out.println("3. 거래 내역");
+						System.out.println("4. 관리자 기능");
+						System.out.println("5. 로그아웃");
+						System.out.print("\n메뉴를 입력하세요 : ");
 
-					switch (menuNum) {
-					case 1:
+						subMenuNum = scan.nextInt();
 
-						break;
-					case 2:
+						if (subMenuNum == 1) {
 
-						break;
-					case 3:
+						} else if (subMenuNum == 2) {
 
-						break;
-					case 4:
-						break;
-					case 5:
-						break;
-					default:
-						System.out.println("잘못된 입력입니다!");
+						} else if (subMenuNum == 3) {
+
+						} else if (subMenuNum == 4) {
+							Menu4.main();
+						} else if (subMenuNum == 5) {
+							Main.id = null;
+							Main.admin = false;
+							res = false;
+							System.out.println("로그아웃 하셨습니다!");
+							break;
+
+						} else {
+							System.out.println("잘못된 입력입니다!");
+						}
 					}
-
 				}
-				break;
-			case 2:
+
+			} else if (menuNum == 2) {
 				signup();
-				break;
-			case 3:
+			} else if (menuNum == 3) {
 				System.out.println("서비스를 종료합니다.");
 				System.exit(0);
-				break;
-			default:
+			} else {
 				System.out.println("잘못된 입력입니다!");
 			}
+
 		}
 	}
 
@@ -126,10 +135,10 @@ public class Main {
 		String loginPW = null;
 		String sql = null;
 		boolean result = false;
-		
+
 		ResultSet rs = null;
 		Statement stmt = null;
-		
+
 		Account userinfo = new Account();
 		Scanner scan = new Scanner(System.in);
 
@@ -183,90 +192,168 @@ public class Main {
 
 	public static void signup() {
 		String sql = null;
+		StringBuffer sb = new StringBuffer();
 		Account userinfo = new Account();
 		Scanner scan = new Scanner(System.in);
-		StringBuffer sb = new StringBuffer();
-		boolean check = false;
-		
+		String temp = null;
+		boolean ad = false;
+
 		ResultSet rs = null;
 		Statement stmt = null;
 
 		try {
-			
+
 			stmt = conn.createStatement();
-			
+
 			System.out.println("[회원가입]");
+			System.out.println("관리자용 회원가입이면 ADMIN을 입력하세요 : ");
+			temp = scan.nextLine();
+
+			if (temp.equals("ADMIN")) {
+				ad = true;
+				System.out.println("[관리자 회원가입]");
+			} else {
+				ad = false;
+				System.out.println("[회원가입]");
+			}
+
 			System.out.println("아래 사항을 차례로 기입하세요.(1~9)");
 			System.out.println("'*'는 필수 입력 사항입니다.");
 
 			while (true) {
+				sb.setLength(0);
+				boolean check = false;
 
 				System.out.println();
 				System.out.print("1.*아이디 : ");
 				userinfo.setAccountID(scan.nextLine().trim());
-				
-				if(userinfo.getAccountId().equals("")) {
+
+				if (userinfo.getAccountId().equals("")) {
 					System.out.println("필수 입력 사항입니다!");
 					continue;
 				}
-			
-				//sql = "select * from Account where id = '" + userinfo.getAccountId() + "'";
-				System.out.println(sql);
-				
+
+				sql = "select * from Account where id = '" + userinfo.getAccountId() + "'";
+				// System.out.println(sql);
+
 				rs = stmt.executeQuery(sql);
-				
-				while(rs.next()) {
+
+				while (rs.next()) {
 					check = true;
 				}
-				
+
 				if (check == true) {
 					System.out.println("중복된 아이디 입니다!");
 					continue;
-				} 
-				else {
+				} else {
 					System.out.println("사용 가능한 아이디 입니다.");
 				}
-				
-				/*
+
+				sb.append("insert into account values (" + "'" + userinfo.getAccountId() + "', ");
+
 				System.out.print("2.*비밀번호 : ");
-				userPW = scan.nextLine();
+				userinfo.setAccountPW(scan.nextLine().trim());
+
+				if (userinfo.getAccountPW().equals("")) {
+					System.out.println("필수 입력 사항입니다!");
+					continue;
+				}
+
+				sb.append("'" + userinfo.getAccountPW() + "', ");
 
 				System.out.print("3.*이름(영문자 표기, 예 : HongGilDong) : ");
-				Name = scan.nextLine();
+				userinfo.setName(scan.nextLine().trim());
+
+				if (userinfo.getName().equals("")) {
+					System.out.println("필수 입력 사항입니다!");
+					continue;
+				}
+
+				sb.append("'" + userinfo.getName() + "', ");
 
 				System.out.print("4.*전화번호('-'제외하고 입력) : ");
-				Phone = scan.nextLine();
+				userinfo.setPhone(scan.nextLine().trim());
+
+				if (userinfo.getPhone().equals("")) {
+					System.out.println("필수 입력 사항입니다!");
+					continue;
+				}
+
+				sb.append("'" + userinfo.getPhone() + "', ");
 
 				System.out.print("5.*이메일 : ");
-				Email = scan.nextLine();
+				userinfo.setEmail(scan.nextLine().trim());
+
+				if (userinfo.getEmail().equals("")) {
+					System.out.println("필수 입력 사항입니다!");
+					continue;
+				}
+
+				sb.append("'" + userinfo.getEmail() + "', ");
 
 				System.out.print("6.*주소(도로명 주소 영문표기, 예 : GwanCheonro 17gil 2) : ");
-				Address = scan.nextLine();
+				userinfo.setAddress(scan.nextLine().trim());
+
+				if (userinfo.getAddress().equals("")) {
+					System.out.println("필수 입력 사항입니다!");
+					continue;
+				}
+
+				sb.append("'" + userinfo.getAddress() + "', ");
 
 				System.out.print("7.성별(M/F) : ");
-				Gender = scan.nextLine();
+				userinfo.setGender(scan.nextLine().trim());
 
-				System.out.print("8.생년월일(년,월,일 순으로, 예 : 97/7/12) : ");
-				Birth = scan.nextLine();
+				if (!(userinfo.getGender().equals("M") || userinfo.getGender().equals("F")
+						|| userinfo.getGender().equals(""))) {
+					System.out.println("성별을 다시 입력하세요!");
+					continue;
+				}
+
+				if (userinfo.getGender().equals("")) {
+					sb.append("null, ");
+				} else {
+					sb.append("'" + userinfo.getGender() + "', ");
+				}
+
+				System.out.print("8.생년월일(예 : yyyy-mm-dd) : ");
+				userinfo.setBirth(scan.nextLine().trim());
+
+				if (userinfo.getBirth().equals("")) {
+					sb.append("null, ");
+				} else {
+					sb.append("to_date('" + userinfo.getBirth() + "', 'yyyy-mm-dd'), ");
+				}
 
 				System.out.print("9.직업 : ");
-				Job = scan.nextLine();
-				*/
-				/*
-				try {
-					sql = "INSERT INTO ACCOUNT VALUES ('" + userID + "'" + userPW + "'" + Name + "'" + Phone + "'"
-							+ Email + "'" + Address + "'" + Gender + "'" + Birth + "'" + Job + ")";
-				} catch (Exception e) {
-					System.err.println("insert error : " + e.getMessage());
-					System.exit(1);
+				userinfo.setJob(scan.nextLine().trim());
+
+				if (userinfo.getJob().equals("")) {
+					sb.append("null, ");
+				} else {
+					sb.append("'" + userinfo.getJob() + "', ");
 				}
-				*/
 
-				System.out.println("회원가입에 성공하셨습니다!");
+				if (ad == true) {
+					sb.append("'T')");
+				} else {
+					sb.append("'F')");
+				}
 
+				int res = stmt.executeUpdate(sb.toString());
+				// System.out.println(sb.toString());
+
+				if (res == 1) {
+					System.out.println("회원가입에 성공하셨습니다!");
+					conn.commit();
+					break;
+				} else {
+					System.out.println("회원가입에 실패하셨습니다!");
+					break;
+				}
 			}
 		} catch (Exception e) {
-			System.err.println("insert error : " + e.getMessage());
+			System.err.println("connection error : " + e.getMessage());
 			System.exit(1);
 		}
 	}
