@@ -64,11 +64,12 @@ public class Menu3 {
 		}
 	}
 
+	//거래 내역(sql1 : 회원 , sql2 : 관리자)
 	public static void showOrder() {
 
 		ResultSet rs = null;
 		Statement stmt = null;
-
+		int count = 0;
 
 		String sql1 = "select * from ORDER_INFO where SELLER = '" + Main.id + "'";
 		String sql2 = "select * from ORDER_INFO";
@@ -90,7 +91,7 @@ public class Menu3 {
 		try {
 
 			while (rs.next()) {
-
+				
 				int orderNum = rs.getInt(1);
 				String orderDate = rs.getString(2);
 				String buyer = rs.getString(3);
@@ -99,8 +100,14 @@ public class Menu3 {
 
 				System.out.println("주문번호 : " + orderNum + ", 주문날짜 = " + orderDate + ", 구매자 = " + buyer + ", 판매자 = "
 						+ seller + ", 차량번호 = " + vNum);
-
+				
+				count++;
 			}
+			
+			if(count == 0) {
+				System.out.println("\n거래 내역이 없습니다!\n");
+			}
+			
 			rs.close();
 
 		} catch (SQLException e) {
@@ -108,7 +115,8 @@ public class Menu3 {
 			e.printStackTrace();
 		}
 	}
-
+	
+	//월별 매출 내역
 	public static void showMonthsale() {
 
 		ResultSet rs = null;
@@ -136,6 +144,7 @@ public class Menu3 {
 		}
 	}
 	
+	//연별 매출 내역
 	public static void showYearsale() {
 
 		ResultSet rs = null;
@@ -163,6 +172,7 @@ public class Menu3 {
 		}
 	}
 	
+	//제조사별 매출 내역
 	public static void showMakersale() {
 
 		ResultSet rs = null;
