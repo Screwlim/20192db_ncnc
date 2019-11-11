@@ -35,6 +35,9 @@ public class Main {
 			System.err.println("Cannot get a connection: " + e.getMessage());
 			System.exit(1);
 		}
+		
+		//FILTER 테이블 생성 유무 확인 후, 없으면 생성 아니면 넘어감.
+		makeFilter();
 
 		while (true) {
 			// menu
@@ -163,7 +166,6 @@ public class Main {
 				loginPW = scan.nextLine();
 
 				sql = "select * from Account where id = '" + loginID + "' and password = '" + loginPW + "'";
-				// System.out.println(sql);
 
 				rs = stmt.executeQuery(sql);
 
@@ -180,6 +182,10 @@ public class Main {
 						System.out.println(Main.id + "님이 로그인 하셨습니다!\n");
 						Main.admin = false;
 					}
+					
+					rs.close();
+					stmt.close();
+					
 					return result;
 				} else {
 					System.out.println("로그인 정보를 다시 입력하세요!");
@@ -189,11 +195,11 @@ public class Main {
 			System.err.println("login error : " + e.getMessage());
 			System.exit(1);
 		}
-
 		return false;
 	}
 
 	public static void signup() {
+
 		String sql = null;
 		StringBuffer sb = new StringBuffer();
 		Account userinfo = new Account();
@@ -349,6 +355,10 @@ public class Main {
 				if (res == 1) {
 					System.out.println("회원가입에 성공하셨습니다!");
 					conn.commit();
+					
+					rs.close();
+					stmt.close();
+					
 					break;
 				} else {
 					System.out.println("회원가입에 실패하셨습니다!");
@@ -358,6 +368,49 @@ public class Main {
 		} catch (Exception e) {
 			System.err.println("connection error : " + e.getMessage());
 			System.exit(1);
+		}
+	}
+
+	public static void makeFilter() {
+		String sql = null; 
+		
+		ResultSet rs = null;
+		Statement stmt = null;
+		
+		try {
+			sql = "select count(*) from all_tables where table_name = 'FILTER'";
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				if(rs.getInt("count(*)") == 0) {
+					sql = "create table FILTER (ORDER_NUM number primary key, foreign key (ORDER_NUM) references ORDER_INFO(ORDER_NUM) on delete CASCADE)";
+					
+					int res = stmt.executeUpdate(sql);
+					
+					if( res == 0) {
+						//System.out.println("정상적으로 filter가 만들어졌습니다.");
+						conn.commit();
+					}
+					else {
+						System.out.println("비정상적인 이유로 filter가 만들어지지않았습니다. table FILTER 유무를 확인해주세요.");
+					}
+				}
+			}
+			
+			sql = "create or replace view Blind_info as select * from order_info O where not exists (select * from filter F where O.buyer is null and O.order_num = F.order_num) ";
+
+			int res = stmt.executeUpdate(sql);
+			
+			if( res == 0 ) {
+				//System.out.println("정상적으로 blind_info view가 만들어졌습니다.");
+				conn.commit();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

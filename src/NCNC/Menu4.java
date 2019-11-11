@@ -51,10 +51,12 @@ public class Menu4 {
 
 				case 2:
 					// [등록 차량 수정]
+					updateForSale();
 					break;
 
 				case 3:
 					// [비공개 처리]
+					blindForSale();
 					break;
 
 				case 4:
@@ -167,7 +169,21 @@ public class Menu4 {
 
 	public static void updateForSale() {
 		String sql = null;
+		StringBuffer sb1 = new StringBuffer();
+		
+		boolean change = false;
+		
 		String vehicleNum = null;
+		String model_year = null;
+		int mileage = 0;
+		int price = 0;
+		int Fnum = 0;
+		int Cnum = 0;
+		int Ctnum = 0;
+		int Enum = 0;
+		int Tnum = 0;
+		int Dnum = 0;
+		
 		String Stemp = null;
 		int temp = 0;
 		
@@ -175,39 +191,27 @@ public class Menu4 {
 		
 		System.out.println("[등록 차량 수정]");
 		
-		/*
-		 create table vehicle (
-      Vehicle_num varchar2(8) primary key,
-      Model_year date not null,
-      Mileage Number not null,
-      Price Number not null,
-      Fnum Number not null,
-      Cnum Number not null,
-      Ctnum Number not null,
-      Enum Number not null,
-      Tnum Number not null,
-      Dnum Number not null,
-      Foreign key (Fnum) references FUEL(Fuel_id),
-      Foreign key (Cnum) references Color(Color_id),
-      Foreign key (Ctnum) references CATEGORY(C_id),
-      Foreign key (Enum) references Engine_Displacement(Ed_id),
-      Foreign key (Tnum) references TRANSMISSION(T_id),
-      Foreign key (Dnum) references DETAILED_MODEL(Detail_id));
-		 */
-		
-		
 		//우선 차량 번호 받고, 있는지 조사한 후, 수정할 값을 받는다.
 		
 		try {
 			while(true) {
-				System.out.print("수정할 차량의 차량번호를 입력하세요 : ");
+				System.out.print("수정할 매물의 차량번호를 입력하세요 : ");
 				vehicleNum = scan.nextLine();
 				
-				sql = "select * from vehicle where vehicle_num = '" + vehicleNum + "'";
+				sql = "select * from order_info where buyer is null and vnum = '" + vehicleNum + "'";
 
 				rs = stmt.executeQuery(sql);
 				
 				while(rs.next()) {
+					model_year = rs.getString(2);
+					mileage = rs.getInt(3);
+					price = rs.getInt(4);
+					Fnum = rs.getInt(5);
+					Cnum = rs.getInt(6);
+					Ctnum = rs.getInt(7);
+					Enum = rs.getInt(8);
+					Tnum = rs.getInt(9);
+					Dnum = rs.getInt(10);
 					exist = true;
 				}
 				
@@ -220,52 +224,564 @@ public class Menu4 {
 				}
 			}
 			
+			rs.close();
+			
 			System.out.println("차량의 수정할 정보를 입력하세요. (수정을 원치않으면, 공백을 입력)");
 			
-			System.out.print("연식 (yyyy-mm-dd) : ");
-			System.out.print("주행거리 : ");
-			System.out.print("가격 : ");
+			sb1.append("update vehicle set ");
+			
+			while(true) {
+				
+				System.out.print("연식 (yyyy-mm-dd) (현재 : " + model_year +  ") : ");
+				
+				model_year = scan.nextLine().trim();
+				
+				if(model_year.equals(""))
+					break;
+								
+				if (!model_year.matches("\\d{4}-\\d{2}-\\d{2}"))
+				   System.out.println("형식에 맞춰 다시 입력하세요!");
+				else
+					break;
+				
+			}
+			
+			if(!model_year.equals("")) {
+				change = true;
+				sb1.append("model_year = to_date('" + model_year + "', 'yyyy-mm-dd')");
+			}
+			
+			
+			
+			System.out.print("주행거리 (현재 : " + mileage + ") : ");
+			
+			Stemp = scan.nextLine().trim();
+			
+			if(!Stemp.equals("")) {
+				change = true;
+				sb1.append(", mileage = " + Integer.valueOf(Stemp));
+			}
+			
+			
+			System.out.print("가격 (현재 : " + price + "): ");
+			
+			Stemp = scan.nextLine().trim();
+			
+			if(!Stemp.equals("")) {
+				change = true;
+				sb1.append(", price = " + Integer.valueOf(Stemp));
+			}
+			
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			sql = "select min(fuel_id), max(fuel_id) from fuels";
+			
+			rs = stmt.executeQuery(sql);
+			
+			int min = 0;
+			int max = 0;
+			
+			while(rs.next()) {
+				min = rs.getInt("min(fuel_id)");
+				max = rs.getInt("max(fuel_id)");
+			}
 			
 			sql = "select * from fuels";
 			
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				System.out.println("번호 : " + String.valueOf(rs.getInt(0)) + ", 종류" + rs.getString(1));
+				System.out.println("번호 : " + String.valueOf(rs.getInt("fuel_id")) + ", 종류 : " + rs.getString("fuel_type"));
+			}
+			
+			while(true) {
+				System.out.print("연료 번호를 입력하세요 (현재 : "+ Fnum +") : ");
+				Stemp = scan.nextLine().trim();
+				
+				if(Stemp.equals(""))
+					break;
+				
+				if( min <= Integer.parseInt(Stemp) && Integer.parseInt(Stemp) <= max ) {
+					break;
+				}
+				else {
+					System.out.println("범위를 확인해주세요.");
+				}
+				
 			}
 
-			System.out.print("연료 번호를 입력하세요 : ");
-			Stemp = scan.nextLine().trim();
+			if(!Stemp.equals("")) {
+				change = true;
+				sb1.append(", Fnum = " + Integer.parseInt(Stemp));
+			}
 			
-			if(Stemp.equals("")) {
-				//암것도 안하고 넘어감
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			sql = "select min(color_id), max(color_id) from colors";
+			
+			rs = stmt.executeQuery(sql);
+			
+			min = 0;
+			max = 0;
+			
+			while(rs.next()) {
+				min = rs.getInt("min(color_id)");
+				max = rs.getInt("max(color_id)");
+			}
+			
+			sql = "select * from colors";
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				System.out.println("번호 : " + String.valueOf(rs.getInt("color_id")) + ", 종류 : " + rs.getString("color_name"));
+			}
+			
+			while(true) {
+				System.out.print("색상을 입력하세요 (현재 : "+ Cnum +") : ");
+				Stemp = scan.nextLine().trim();
+				
+				if(Stemp.equals(""))
+					break;
+				
+				if( min <= Integer.parseInt(Stemp) && Integer.parseInt(Stemp) <= max ) {
+					break;
+				}
+				else {
+					System.out.println("범위를 확인해주세요.");
+				}
+				
+			}
+
+			if(!Stemp.equals("")) {
+				change = true;
+				sb1.append(", Cnum = " + Integer.parseInt(Stemp));
+			}
+			
+			
+			
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			sql = "select min(c_id), max(c_id) from category";
+			
+			rs = stmt.executeQuery(sql);
+			
+			min = 0;
+			max = 0;
+			
+			while(rs.next()) {
+				min = rs.getInt("min(c_id)");
+				max = rs.getInt("max(c_id)");
+			}
+			
+			sql = "select * from category";
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				System.out.println("번호 : " + String.valueOf(rs.getInt("c_id")) + ", 종류 : " + rs.getString("c_type"));
+			}
+			
+			while(true) {
+				System.out.print("카테고리 (현재 : "+ Ctnum +") : ");
+				Stemp = scan.nextLine().trim();
+				
+				if(Stemp.equals(""))
+					break;
+				
+				if( min <= Integer.parseInt(Stemp) && Integer.parseInt(Stemp) <= max ) {
+					break;
+				}
+				else {
+					System.out.println("범위를 확인해주세요.");
+				}
+				
+			}
+
+			if(!Stemp.equals("")) {
+				change = true;
+				sb1.append(", Ctnum = " + Integer.parseInt(Stemp));
+			}
+			
+		
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			sql = "select min(ed_id), max(ed_id) from engine_displacement";
+			
+			rs = stmt.executeQuery(sql);
+			
+			min = 0;
+			max = 0;
+			
+			while(rs.next()) {
+				min = rs.getInt("min(ed_id)");
+				max = rs.getInt("max(ed_id)");
+			}
+			
+			sql = "select * from engine_displacement";
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				System.out.println("번호 : " + String.valueOf(rs.getInt("ed_id")) + ", 종류 : " + rs.getString("ed_type"));
+			}
+			
+			while(true) {
+				System.out.print("배기량 (현재 : "+ Enum +") : ");
+				Stemp = scan.nextLine().trim();
+				
+				if(Stemp.equals(""))
+					break;
+				
+				if( min <= Integer.parseInt(Stemp) && Integer.parseInt(Stemp) <= max ) {
+					break;
+				}
+				else {
+					System.out.println("범위를 확인해주세요.");
+				}
+				
+			}
+
+			if(!Stemp.equals("")) {
+				change = true;
+				sb1.append(", Enum = " + Integer.parseInt(Stemp));
+			}
+		
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			
+			sql = "select min(t_id), max(t_id) from transmission";
+			
+			rs = stmt.executeQuery(sql);
+			
+			min = 0;
+			max = 0;
+			
+			while(rs.next()) {
+				min = rs.getInt("min(t_id)");
+				max = rs.getInt("max(t_id)");
+			}
+			
+			sql = "select * from transmission";
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				System.out.println("번호 : " + String.valueOf(rs.getInt("t_id")) + ", 종류 : " + rs.getString("t_type"));
+			}
+			
+			while(true) {
+				System.out.print("트랜스미션 (현재 : "+ Tnum +") : ");
+				Stemp = scan.nextLine().trim();
+				
+				if(Stemp.equals(""))
+					break;
+				
+				if( min <= Integer.parseInt(Stemp) && Integer.parseInt(Stemp) <= max ) {
+					break;
+				}
+				else {
+					System.out.println("범위를 확인해주세요.");
+				}
+				
+			}
+
+			if(!Stemp.equals("")) {
+				change = true;
+				sb1.append(", Tnum = " + Integer.parseInt(Stemp));
+			}
+			
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			//메이커 뽑고, 모델 뽑고, 세부 모델 뽑아서 적용시키자..
+			
+			sql = "select min(maker_id), max(maker_id) from maker";
+			
+			rs = stmt.executeQuery(sql);
+			
+			min = 0;
+			max = 0;
+			
+			while(rs.next()) {
+				min = rs.getInt("min(maker_id)");
+				max = rs.getInt("max(maker_id)");
+			}
+			
+			sql = "select * from maker";
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				System.out.println("번호 : " + String.valueOf(rs.getInt("maker_id")) + ", 종류 : " + rs.getString("maker_name"));
+			}
+			
+			while(true) {
+				System.out.print("제조사를 선택하세요 : ");
+				Stemp = scan.nextLine().trim();
+				
+				if(Stemp.equals(""))
+					break;
+				
+				if( min <= Integer.parseInt(Stemp) && Integer.parseInt(Stemp) <= max ) {
+					break;
+				}
+				else {
+					System.out.println("범위를 확인해주세요.");
+				}
+				
+			}
+			
+			boolean isSelect = false; 
+			int maker = 0;
+			
+			if(!Stemp.equals("")) {
+				isSelect = true;
+				maker = Integer.parseInt(Stemp);
+			}
+			
+			if(isSelect == true) {
+				
+				sql = "select min(model_id), max(model_id) from model where maker_no = " + String.valueOf(maker);
+				
+				rs = stmt.executeQuery(sql);
+				
+				min = 0;
+				max = 0;
+				
+				while(rs.next()) {
+					min = rs.getInt("min(model_id)");
+					max = rs.getInt("max(model_id)");
+				}
+				
+				sql = "select * from model where maker_no =" + String.valueOf(maker);
+				
+				rs = stmt.executeQuery(sql);
+				
+				while(rs.next()) {
+					System.out.println("번호 : " + String.valueOf(rs.getInt("model_id")) + ", 종류 : " + rs.getString("model_name"));
+				}
+				
+				while(true) {
+					System.out.print("모델을 선택하세요 : ");
+					Stemp = scan.nextLine().trim();
+					
+					if(Stemp.equals(""))
+						break;
+					
+					if( min <= Integer.parseInt(Stemp) && Integer.parseInt(Stemp) <= max ) {
+						break;
+					}
+					else {
+						System.out.println("범위를 확인해주세요.");
+					}
+					
+				}
+				
+				isSelect = false;
+				int model = 0;
+				
+				if(!Stemp.equals("")) {
+					isSelect = true;
+					model = Integer.parseInt(Stemp);
+				}
+				
+				if(isSelect == true) {
+					
+					sql = "select min(detail_id), max(detail_id) from detailed_model where mno = " + String.valueOf(model);
+					
+					rs = stmt.executeQuery(sql);
+					
+					min = 0;
+					max = 0;
+					
+					while(rs.next()) {
+						min = rs.getInt("min(detail_id)");
+						max = rs.getInt("max(detail_id)");
+					}
+					
+					sql = "select * from detailed_model where mno =" + String.valueOf(model);
+					
+					rs = stmt.executeQuery(sql);
+					
+					while(rs.next()) {
+						System.out.println("번호 : " + String.valueOf(rs.getInt("detail_id")) + ", 종류 : " + rs.getString("detail_id"));
+					}
+					
+					while(true) {
+						System.out.print("세부 모델을 선택하세요 : ");
+						Stemp = scan.nextLine().trim();
+						
+						if(Stemp.equals(""))
+							break;
+						
+						if( min <= Integer.parseInt(Stemp) && Integer.parseInt(Stemp) <= max ) {
+							break;
+						}
+						else {
+							System.out.println("범위를 확인해주세요.");
+						}
+						
+					}
+					
+					if(!Stemp.equals("")) {
+						change = true;
+						sb1.append(", Dnum = " + Integer.parseInt(Stemp));
+					}
+					
+				}
+				
+			}
+			 
+			
+			if(change == true) {
+				sb1.append(" where vehicle_num = '" + vehicleNum +"'");
+				
+				int res = stmt.executeUpdate(sb1.toString());
+				
+			//	System.out.println(sb1.toString());
+				
+				if(res == 1) {
+					System.out.println("정상적으로 처리 되었습니다.");
+				}
+				else {
+					System.out.println("다시 시도해 주세요!");
+				}
+				
 			}
 			else {
-				temp = Integer.parseInt(Stemp);
+				System.out.println("갱신하지않고 종료합니다.");
 			}
-			
-			
-			
-			System.out.print(" : ");
-			System.out.print(" : ");
-			System.out.print(" : ");
-			System.out.print(" : ");
-			System.out.print(" : ");
-			System.out.print(" : ");
-			System.out.print(" : ");
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-
 	}
 
 	public static void blindForSale() {
+		String sql = null;
+		String Stemp = null;
+		
 		System.out.println("[비공개 처리]");
+		
+		try {
+			
+			while(true) {
+				System.out.print("비공개 등록을 원하면 Y(y), 비공개 해제를 원하면 N(n)을 입력하세요. : ");
+				Stemp = scan.nextLine().trim();
+				
+				if(Stemp.equals("Y") || Stemp.equals("y")) {
+					//비공개 등록
+
+					while(true) {
+						
+						System.out.print("비공개 처리할 매물의 ORDER_NUM을 입력하세요! (원치않으면 공백을 입력하세요) : ");
+						Stemp = scan.nextLine().trim();
+						
+						if(Stemp.equals("")) {
+							System.out.println("매물 비공개를 종료합니다.");
+							break;
+						}
+						else {
+							if(!Stemp.matches("^[0-9]*$")) {
+								System.out.println("숫자만 입력하세요!");
+							}
+							else {
+								
+								sql = "select * from filter where order_num = " + String.valueOf(Stemp);
+								
+								rs = stmt.executeQuery(sql);
+								
+								if(rs.next()) {
+									System.out.println("이미 비공개 등록된 매물입니다.");
+									break;
+								}
+								
+								//판매중인 매물에서 입력받은 ORDER_NUM이 존재하는지 확인.
+								sql = "select * from order_info where buyer is null and Order_num = " + String.valueOf(Stemp);
+								
+								rs = stmt.executeQuery(sql);
+								
+								if(rs.next()) {
+									sql = "insert into FILTER values (" + String.valueOf(Stemp) + ")";
+									
+									//System.out.println(sql);
+									
+									int res = stmt.executeUpdate(sql);
+									
+									if ( res == 0 ) {
+										System.out.println("비정상적으로 처리 되었습니다. 다시 확인해주세요");
+										break;
+									}
+									else {
+										System.out.println("정상적으로 처리 되었습니다.");
+										break;
+									}
+								}
+								else {
+									System.out.println("판매중인 매물에서 일치하는 매물이 존재하지않습니다.");
+									break;
+								}
+								
+							}
+						}					
+					}
+					//비공개 등록 완료
+					break;
+					
+				}
+				else if(Stemp.equals("N") || Stemp.equals("n")) {
+					//비공개 해제
+					
+					while(true) {
+						
+						System.out.print("비공개 처리 해제할 매물의 ORDER_NUM을 입력하세요! (원치않으면 공백을 입력하세요) : ");
+						Stemp = scan.nextLine().trim();
+						
+						if(Stemp.equals("")) {
+							System.out.println("매물 비공개 해제를 종료합니다.");
+							break;
+						}
+						else {
+							if(!Stemp.matches("^[0-9]*$")) {
+								System.out.println("숫자만 입력하세요!");
+							}
+							else {
+								
+								sql = "select * from filter where order_num = " + String.valueOf(Stemp);
+								
+								rs = stmt.executeQuery(sql);
+								
+								if(rs.next()) {
+									
+									sql = "delete from FILTER where Order_num = " + String.valueOf(Stemp);
+									
+									int res = stmt.executeUpdate(sql);
+									
+									if ( res == 0 ) {
+										System.out.println("비정상적으로 처리 되었습니다. 다시 확인해주세요");
+										break;
+									}
+									else {
+										System.out.println("정상적으로 처리 되었습니다.");
+										break;
+									}
+								}
+								else {
+									System.out.println("비공개 등록되지않은 매물입니다.");
+									break;
+								}
+							}
+						}					
+					}
+					//비공개 해제 완료
+					break;
+				}
+				else {
+					System.out.println("입력이 바르지 않습니다. 다시 입력해주세요.");
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
