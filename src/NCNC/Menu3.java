@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-//°Å·¡ ³»¿ª ±â´É
+//ê±°ë˜ ë‚´ì—­ ê¸°ëŠ¥
 public class Menu3 {
 
 	public static void main(){
@@ -14,12 +14,12 @@ public class Menu3 {
 		ResultSet rs = null;
 		Statement stmt = null;
 
-		System.out.println("[°Å·¡ ³»¿ª ¼­ºñ½º ÀÔ´Ï´Ù.]");
+		System.out.println("[ê±°ë˜ ë‚´ì—­ ì„œë¹„ìŠ¤ ì…ë‹ˆë‹¤.]");
 
-		// »ç¿ëÀÚ·Î È­¸é(°Å·¡³»¿ª¸¸ Áö¿ø)
+		// ì‚¬ìš©ìë¡œ í™”ë©´(ê±°ë˜ë‚´ì—­ë§Œ ì§€ì›)
 		if (Main.admin == false) {
 
-			System.out.println("\nÈ¸¿ø´ÔÀÇ °Å·¡ ³»¿ªÀÔ´Ï´Ù.");
+			System.out.println("\níšŒì›ë‹˜ì˜ ê±°ë˜ ë‚´ì—­ì…ë‹ˆë‹¤.");
 
 
 			showOrder();
@@ -31,19 +31,19 @@ public class Menu3 {
 			Scanner scan = new Scanner(System.in);
 
 			while (true) {
-				// °ü¸®ÀÚÀÏ °æ¿ì
-				System.out.println("\n1. ¸ğµç °Å·¡ ³»¿ª Ãâ·Â");
-				System.out.println("2. ¿ùº° ¸ÅÃâ¾×");
-				System.out.println("3. ¿¬µµ»çº° ¸ÅÃâ¾×");
-				System.out.println("4. Á¦Á¶»çº° ¸ÅÃâ¾×");
-				System.out.println("5. µ¹¾Æ°¡±â");
-				System.out.println("\n¸Ş´º¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+				// ê´€ë¦¬ìì¼ ê²½ìš°
+				System.out.println("\n1. ëª¨ë“  ê±°ë˜ ë‚´ì—­ ì¶œë ¥");
+				System.out.println("2. ì›”ë³„ ë§¤ì¶œì•¡");
+				System.out.println("3. ì—°ë„ì‚¬ë³„ ë§¤ì¶œì•¡");
+				System.out.println("4. ì œì¡°ì‚¬ë³„ ë§¤ì¶œì•¡");
+				System.out.println("5. ëŒì•„ê°€ê¸°");
+				System.out.println("\në©”ë‰´ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 
 				menuNum = scan.nextInt();
 
 				if (menuNum == 1) {
 
-					System.out.println("\n¸ğµç °Å·¡ ³»¿ªÀÔ´Ï´Ù.");
+					System.out.println("\nëª¨ë“  ê±°ë˜ ë‚´ì—­ì…ë‹ˆë‹¤.");
 					showOrder();
 				} else if (menuNum == 2) {
 					showMonthsale();
@@ -53,18 +53,18 @@ public class Menu3 {
 					showMakersale();
 				} else if (menuNum == 5) {
 
-					System.out.println("°Å·¡ ³»¿ª ¼­ºñ½º¸¦ Á¾·áÇÕ´Ï´Ù.");
+					System.out.println("ê±°ë˜ ë‚´ì—­ ì„œë¹„ìŠ¤ë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.");
 
 					break;
 
 				} else {
-					System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù!");
+					System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤!");
 				}
 			}
 		}
 	}
 
-	//°Å·¡ ³»¿ª(sql1 : È¸¿ø , sql2 : °ü¸®ÀÚ)
+	//ê±°ë˜ ë‚´ì—­(sql1 : íšŒì› , sql2 : ê´€ë¦¬ì)
 	public static void showOrder() {
 
 		ResultSet rs = null;
@@ -98,14 +98,14 @@ public class Menu3 {
 				String seller = rs.getString(4);
 				String vNum = rs.getString(5);
 
-				System.out.println("ÁÖ¹®¹øÈ£ : " + orderNum + ", ÁÖ¹®³¯Â¥ = " + orderDate + ", ±¸¸ÅÀÚ = " + buyer + ", ÆÇ¸ÅÀÚ = "
-						+ seller + ", Â÷·®¹øÈ£ = " + vNum);
+				System.out.println("ì£¼ë¬¸ë²ˆí˜¸ : " + orderNum + ", ì£¼ë¬¸ë‚ ì§œ = " + orderDate + ", êµ¬ë§¤ì = " + buyer + ", íŒë§¤ì = "
+						+ seller + ", ì°¨ëŸ‰ë²ˆí˜¸ = " + vNum);
 				
 				count++;
 			}
 			
 			if(count == 0) {
-				System.out.println("\n°Å·¡ ³»¿ªÀÌ ¾ø½À´Ï´Ù!\n");
+				System.out.println("\nê±°ë˜ ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤!\n");
 			}
 			
 			rs.close();
@@ -116,7 +116,7 @@ public class Menu3 {
 		}
 	}
 	
-	//¿ùº° ¸ÅÃâ ³»¿ª
+	//ì›”ë³„ ë§¤ì¶œ ë‚´ì—­
 	public static void showMonthsale() {
 
 		ResultSet rs = null;
@@ -128,13 +128,13 @@ public class Menu3 {
 			stmt = Main.conn.createStatement();
 			rs = stmt.executeQuery(sql);
 
-			System.out.println("[¿ùº° ¸ÅÃâ¾× ÀÔ´Ï´Ù.]");
+			System.out.println("[ì›”ë³„ ë§¤ì¶œì•¡ ì…ë‹ˆë‹¤.]");
 			while (rs.next()) {
 
 				String Month = rs.getString(1);
 				int totlaPrice = (int) rs.getLong(2);
 
-				System.out.println("¿ù = " + Month + ", ¸ÅÃâ = " + totlaPrice + "¿ø");
+				System.out.println("ì›” = " + Month + ", ë§¤ì¶œ = " + totlaPrice + "ì›");
 			}
 			rs.close();
 			
@@ -144,7 +144,7 @@ public class Menu3 {
 		}
 	}
 	
-	//¿¬º° ¸ÅÃâ ³»¿ª
+	//ì—°ë³„ ë§¤ì¶œ ë‚´ì—­
 	public static void showYearsale() {
 
 		ResultSet rs = null;
@@ -156,13 +156,13 @@ public class Menu3 {
 			stmt = Main.conn.createStatement();
 			rs = stmt.executeQuery(sql);
 
-			System.out.println("[³âº° ¸ÅÃâ¾× ÀÔ´Ï´Ù.]");
+			System.out.println("[ë…„ë³„ ë§¤ì¶œì•¡ ì…ë‹ˆë‹¤.]");
 			while (rs.next()) {
 
 				String Year = rs.getString(1);
 				int totlaPrice = (int) rs.getLong(2);
 
-				System.out.println("³â = 20" + Year + ", ¸ÅÃâ = " + totlaPrice + "¿ø");
+				System.out.println("ë…„ = 20" + Year + ", ë§¤ì¶œ = " + totlaPrice + "ì›");
 			}
 			rs.close();
 			
@@ -172,7 +172,7 @@ public class Menu3 {
 		}
 	}
 	
-	//Á¦Á¶»çº° ¸ÅÃâ ³»¿ª
+	//ì œì¡°ì‚¬ë³„ ë§¤ì¶œ ë‚´ì—­
 	public static void showMakersale() {
 
 		ResultSet rs = null;
@@ -184,13 +184,13 @@ public class Menu3 {
 			stmt = Main.conn.createStatement();
 			rs = stmt.executeQuery(sql);
 
-			System.out.println("[³âº° ¸ÅÃâ¾× ÀÔ´Ï´Ù.]");
+			System.out.println("[ë…„ë³„ ë§¤ì¶œì•¡ ì…ë‹ˆë‹¤.]");
 			while (rs.next()) {
 
 				String Maker = rs.getString(1);
 				int totlaPrice = (int) rs.getLong(2);
 
-				System.out.println("Á¦Á¶»ç = " + Maker + ", ¸ÅÃâ = " + totlaPrice + "¿ø");
+				System.out.println("ì œì¡°ì‚¬ = " + Maker + ", ë§¤ì¶œ = " + totlaPrice + "ì›");
 			}
 			rs.close();
 			

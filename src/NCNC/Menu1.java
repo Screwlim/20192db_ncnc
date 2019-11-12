@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import com.sun.jdi.connect.spi.Connection;
+//import com.sun.jdi.connect.spi.Connection;
 
 public class Menu1 {
 
@@ -30,15 +30,15 @@ public class Menu1 {
 			e.printStackTrace();
 		}
 
-		System.out.println("[È¸¿ø Á¤º¸ ±â´É]");
+		System.out.println("[íšŒì› ì •ë³´ ê¸°ëŠ¥]");
 
 		while (true) {
 
-			System.out.println("\n1. È¸¿ø Á¤º¸ ¼öÁ¤");
-			System.out.println("2. ºñ¹Ğ¹øÈ£ ¼öÁ¤");
-			System.out.println("3. È¸¿ø Å»Åğ");
-			System.out.println("4. µ¹¾Æ°¡±â");
-			System.out.println("\n¸Ş´º¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+			System.out.println("\n1. íšŒì› ì •ë³´ ìˆ˜ì •");
+			System.out.println("2. ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •");
+			System.out.println("3. íšŒì› íƒˆí‡´");
+			System.out.println("4. ëŒì•„ê°€ê¸°");
+			System.out.println("\në©”ë‰´ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 
 			menuNum = scan.nextInt();
 
@@ -49,15 +49,15 @@ public class Menu1 {
 			} else if (menuNum == 3) {
 				dropAccount();
 			} else if (menuNum == 4) {
-				System.out.println("È¸¿ø Á¤º¸ ¼­ºñ½º¸¦ Á¾·áÇÕ´Ï´Ù.");
+				System.out.println("íšŒì› ì •ë³´ ì„œë¹„ìŠ¤ë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.");
 				break;
 			} else {
-				System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù!");
+				System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤!");
 			}
 		}
 	}
 
-	// È¸¿ø Á¤º¸ ¼öÁ¤ ¸Ş´º
+	// íšŒì› ì •ë³´ ìˆ˜ì • ë©”ë‰´
 	private static void adjustInfo() {
 
 		Scanner scan = new Scanner(System.in);
@@ -81,9 +81,9 @@ public class Menu1 {
 		String adBirth = null;
 		String adJob = null;
 
-		System.out.println("\n[È¸¿ø Á¤º¸ ¼öÁ¤ ¼­ºñ½º]\n");
+		System.out.println("\n[íšŒì› ì •ë³´ ìˆ˜ì • ì„œë¹„ìŠ¤]\n");
 
-		// ¿ì¼± Â÷·® ¹øÈ£ ¹Ş°í, ÀÖ´ÂÁö Á¶»çÇÑ ÈÄ, ¼öÁ¤ÇÒ °ªÀ» ¹Ş´Â´Ù.
+		// ìš°ì„  ì°¨ëŸ‰ ë²ˆí˜¸ ë°›ê³ , ìˆëŠ”ì§€ ì¡°ì‚¬í•œ í›„, ìˆ˜ì •í•  ê°’ì„ ë°›ëŠ”ë‹¤.
 
 		try {
 			while (true) {
@@ -103,96 +103,96 @@ public class Menu1 {
 					Job = rs.getString(9);
 				}
 
-				System.out.println("\n[¼öÁ¤ÇÏ°í ½ÍÀ¸½Å Á¤º¸ÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.]");
-				System.out.println("1. ÀÌ¸§");
-				System.out.println("2. ÀüÈ­¹øÈ£");
-				System.out.println("3. ÀÌ¸ŞÀÏ ÁÖ¼Ò");
-				System.out.println("4. ÁıÁÖ¼Ò");
-				System.out.println("5. ¼ºº°");
-				System.out.println("6. »ıÀÏ");
-				System.out.println("7. Á÷¾÷");
-				System.out.println("8. µ¹¾Æ°¡±â");
-				System.out.println("\n¸Ş´º¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+				System.out.println("\n[ìˆ˜ì •í•˜ê³  ì‹¶ìœ¼ì‹  ì •ë³´ì˜ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.]");
+				System.out.println("1. ì´ë¦„");
+				System.out.println("2. ì „í™”ë²ˆí˜¸");
+				System.out.println("3. ì´ë©”ì¼ ì£¼ì†Œ");
+				System.out.println("4. ì§‘ì£¼ì†Œ");
+				System.out.println("5. ì„±ë³„");
+				System.out.println("6. ìƒì¼");
+				System.out.println("7. ì§ì—…");
+				System.out.println("8. ëŒì•„ê°€ê¸°");
+				System.out.println("\në©”ë‰´ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 
 				menuNum = scan.nextInt();
-				scan.nextLine();// °³Çà ¹®ÀÚ Á¦°¡
+				scan.nextLine();// ê°œí–‰ ë¬¸ì ì œê°€
 
 				rs.close();
 
 				if (menuNum == 1) {
 
-					System.out.print("ÇöÀç È¸¿ø´ÔÀÇ ÀÌ¸§ÀÔ´Ï´Ù :");
+					System.out.print("í˜„ì¬ íšŒì›ë‹˜ì˜ ì´ë¦„ì…ë‹ˆë‹¤ :");
 					System.out.println(Name);
 
-					System.out.print("º¯°æÇÏ½Ç ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
+					System.out.print("ë³€ê²½í•˜ì‹¤ ì´ë¦„ì„ ì…ë ¥í•´ ì£¼ì„¸ìš” : ");
 					adName = scan.nextLine();
 
 					sql1 = "update account set name= '" + adName + "' where id = '" + Main.id + "'";
 					rs1 = stmt.executeQuery(sql1);
 					Main.conn.commit();
 
-					System.out.print("\nº¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n");
+					System.out.print("\në³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 
 					rs1.close();
 
 				} else if (menuNum == 2) {
 
-					System.out.print("ÇöÀç È¸¿ø´ÔÀÇ ÀüÈ­¹øÈ£ÀÔ´Ï´Ù :");
+					System.out.print("í˜„ì¬ íšŒì›ë‹˜ì˜ ì „í™”ë²ˆí˜¸ì…ë‹ˆë‹¤ :");
 					System.out.println(Phonenum);
 
-					System.out.print("º¯°æÇÏ½Ç ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
+					System.out.print("ë³€ê²½í•˜ì‹¤ ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš” : ");
 					adPhonenum = scan.nextLine();
 
 					sql1 = "update account set phone_num = '" + adPhonenum + "' where id = '" + Main.id + "'";
 					rs1 = stmt.executeQuery(sql1);
 					Main.conn.commit();
 
-					System.out.print("\nº¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n");
+					System.out.print("\në³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 
 					rs1.close();
 
 				} else if (menuNum == 3) {
 
-					System.out.print("ÇöÀç È¸¿ø´ÔÀÇ ÀÌ¸ŞÀÏ ÁÖ¼ÒÀÔ´Ï´Ù :");
+					System.out.print("í˜„ì¬ íšŒì›ë‹˜ì˜ ì´ë©”ì¼ ì£¼ì†Œì…ë‹ˆë‹¤ :");
 					System.out.println(Email);
 
-					System.out.print("º¯°æÇÏ½Ç ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
+					System.out.print("ë³€ê²½í•˜ì‹¤ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš” : ");
 					adEmail = scan.nextLine();
 
 					sql1 = "update account set email_address = '" + adEmail + "' where id = '" + Main.id + "'";
 					rs1 = stmt.executeQuery(sql1);
 					Main.conn.commit();
 
-					System.out.print("\nº¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n");
+					System.out.print("\në³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 
 					rs1.close();
 
 				} else if (menuNum == 4) {
 
-					System.out.print("ÇöÀç È¸¿ø´ÔÀÇ ÁıÁÖ¼ÒÀÔ´Ï´Ù :");
+					System.out.print("í˜„ì¬ íšŒì›ë‹˜ì˜ ì§‘ì£¼ì†Œì…ë‹ˆë‹¤ :");
 					System.out.println(Address);
 
-					System.out.print("º¯°æÇÏ½Ç ÁıÁÖ¼Ò¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
+					System.out.print("ë³€ê²½í•˜ì‹¤ ì§‘ì£¼ì†Œë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš” : ");
 					adAddress = scan.nextLine();
 
 					sql1 = "update account set email_address = '" + adAddress + "' where id = '" + Main.id + "'";
 					rs1 = stmt.executeQuery(sql1);
 					Main.conn.commit();
 
-					System.out.print("\nº¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n");
+					System.out.print("\në³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 
 					rs1.close();
 
 				} else if (menuNum == 5) {
 
-					System.out.print("ÇöÀç È¸¿ø´ÔÀÇ ¼ºº°Àº ");
+					System.out.print("í˜„ì¬ íšŒì›ë‹˜ì˜ ì„±ë³„ì€ ");
 
 					if (Gender.equals("M")) {
-						System.out.println("'³²¼º' ÀÔ´Ï´Ù.");
+						System.out.println("'ë‚¨ì„±' ì…ë‹ˆë‹¤.");
 
 						sql1 = "update account set gender = 'F' where id = '" + Main.id + "'";
 					} else if (Gender.equals("F")) {
-						System.out.println("'¿©¼º' ÀÔ´Ï´Ù.");
+						System.out.println("'ì—¬ì„±' ì…ë‹ˆë‹¤.");
 
 						sql1 = "update account set gender = 'M' where id = '" + Main.id + "'";
 					}
@@ -200,15 +200,15 @@ public class Menu1 {
 					rs1 = stmt.executeQuery(sql1);
 					Main.conn.commit();
 
-					System.out.print("\nº¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n");
+					System.out.print("\në³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 					rs1.close();
 
 				} else if (menuNum == 6) {
 
-					System.out.print("ÇöÀç È¸¿ø´ÔÀÇ »ıÀÏ³¯Â¥ÀÔ´Ï´Ù :");
+					System.out.print("í˜„ì¬ íšŒì›ë‹˜ì˜ ìƒì¼ë‚ ì§œì…ë‹ˆë‹¤ :");
 					System.out.println(Birth);
 
-					System.out.print("º¯°æÇÏ½Ç »ıÀÏ³¯Â¥¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
+					System.out.print("ë³€ê²½í•˜ì‹¤ ìƒì¼ë‚ ì§œë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš” : ");
 					adBirth = scan.nextLine();
 
 					if (adBirth.equals("")) {
@@ -220,16 +220,16 @@ public class Menu1 {
 					rs1 = stmt.executeQuery(sql1);
 					Main.conn.commit();
 
-					System.out.print("\nº¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n");
+					System.out.print("\në³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 
 					rs1.close();
 
 				} else if (menuNum == 7) {
 
-					System.out.print("ÇöÀç È¸¿ø´ÔÀÇ Á÷¾÷ÀÔ´Ï´Ù :");
+					System.out.print("í˜„ì¬ íšŒì›ë‹˜ì˜ ì§ì—…ì…ë‹ˆë‹¤ :");
 					System.out.println(Job);
 
-					System.out.print("º¯°æÇÏ½Ç Á÷¾÷À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
+					System.out.print("ë³€ê²½í•˜ì‹¤ ì§ì—…ì„ ì…ë ¥í•´ ì£¼ì„¸ìš” : ");
 					adJob = scan.nextLine();
 
 					if (adJob.equals("")) {
@@ -241,15 +241,15 @@ public class Menu1 {
 					rs1 = stmt.executeQuery(sql1);
 					Main.conn.commit();
 
-					System.out.print("\nº¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n");
+					System.out.print("\në³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 
 					rs1.close();
 
 				} else if (menuNum == 8) {
-					System.out.println("\nÈ¸¿ø Á¤º¸ ¼öÁ¤ ¼­ºñ½º¸¦ Á¾·áÇÕ´Ï´Ù.\n");
+					System.out.println("\níšŒì› ì •ë³´ ìˆ˜ì • ì„œë¹„ìŠ¤ë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.\n");
 					break;
 				} else {
-					System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù!");
+					System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤!");
 				}
 
 			}
@@ -259,7 +259,7 @@ public class Menu1 {
 		}
 	}
 
-	// ºñ¹Ğ¹øÈ£ ¼öÁ¤±â´É
+	// ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •ê¸°ëŠ¥
 	private static void adjustPW() {
 
 		Scanner scan = new Scanner(System.in);
@@ -270,15 +270,15 @@ public class Menu1 {
 		try {
 			stmt = Main.conn.createStatement();
 
-			System.out.println("[ºñ¹Ğ¹øÈ£ º¯°æ ¼­ºñ½º]");
-			System.out.print("º¯°æÇÏ½Ç ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
+			System.out.println("[ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ì„œë¹„ìŠ¤]");
+			System.out.print("ë³€ê²½í•˜ì‹¤ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš” : ");
 			newPW = scan.nextLine();
 
 			sql = "update account set password= '" + newPW + "' where id = '" + Main.id + "'";
 			rs = stmt.executeQuery(sql);
 			Main.conn.commit();
 
-			System.out.print("\nº¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n");
+			System.out.print("\në³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 			rs.close();
 
 		} catch (SQLException e) {
@@ -297,13 +297,13 @@ public class Menu1 {
 		try {
 			stmt = Main.conn.createStatement();
 
-			System.out.println("[È¸¿øÅ»Åğ ¼­ºñ½º]");
+			System.out.println("[íšŒì›íƒˆí‡´ ì„œë¹„ìŠ¤]");
 
 			try {
 				rs = stmt.executeQuery("SELECT COUNT(*) FROM ACCOUNT WHERE is_admin = 'T'");
 				if (rs.next())
 					Count = rs.getInt(1);
-				System.out.println("ÇöÀç °ü¸®ÀÚ ¼ö : " + Count);
+				System.out.println("í˜„ì¬ ê´€ë¦¬ì ìˆ˜ : " + Count);
 
 				rs.close();
 
@@ -313,12 +313,12 @@ public class Menu1 {
 			}
 
 			if (Main.admin && Count == 1) {
-				System.out.println("Áö±İ Á¢¼ÓÇÏ½Å °ü¸®ÀÚ´ÔÀº À¯ÀÏÇÑ °ü¸®ÀÚ ÀÔ´Ï´Ù!");
-				System.out.println("Å»Åğ ±â´ÉÀ» ÀÌ¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.");
+				System.out.println("ì§€ê¸ˆ ì ‘ì†í•˜ì‹  ê´€ë¦¬ìë‹˜ì€ ìœ ì¼í•œ ê´€ë¦¬ì ì…ë‹ˆë‹¤!");
+				System.out.println("íƒˆí‡´ ê¸°ëŠ¥ì„ ì´ìš©í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 			}
 
 			else {
-				System.out.println("Á¤¸»·Î È¸¿øÀ» Å»ÅğÇÏ½Ã°Ú½À´Ï±î?(y or n)");
+				System.out.println("ì •ë§ë¡œ íšŒì›ì„ íƒˆí‡´í•˜ì‹œê² ìŠµë‹ˆê¹Œ?(y or n)");
 
 				answer = scan.nextLine();
 
@@ -328,15 +328,15 @@ public class Menu1 {
 					Main.conn.commit();
 					rs.close();
 
-					System.out.println("\nÅ»Åğ°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
-					System.out.println("Áö±İ±îÁö ÀúÈñ ¼­ºñ¸¦ ÀÌ¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.");
-					System.out.println("¼­ºñ½º¸¦ Á¾·áÇÕ´Ï´Ù.");
+					System.out.println("\níƒˆí‡´ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+					System.out.println("ì§€ê¸ˆê¹Œì§€ ì €í¬ ì„œë¹„ë¥¼ ì´ìš©í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.");
+					System.out.println("ì„œë¹„ìŠ¤ë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.");
 					System.exit(0);
 
 				} else if (answer.equals("n")) {
-					System.out.println("¸Ş´º·Î µ¹¾Æ°©´Ï´Ù.");
+					System.out.println("ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				} else {
-					System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ¸Ş´º·Î µ¹¾Æ°©´Ï´Ù.");
+					System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				}
 			}
 		} catch (SQLException e) {
