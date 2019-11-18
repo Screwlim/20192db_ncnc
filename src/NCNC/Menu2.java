@@ -33,6 +33,7 @@ public class Menu2 {
 				show_all_listed();
 			} else if (menuNum == 2) {
 				//show_Maker_listed
+				show_Maker_listed();
 			} else if (menuNum == 3) {
 				//show_Condition_listed
 			} else if (menuNum == 4) {
@@ -47,8 +48,6 @@ public class Menu2 {
 				System.out.println("잘못된 입력입니다!");
 			}
 		}
-
-
 	}
 	
 	
@@ -58,11 +57,10 @@ public class Menu2 {
 		Statement stmt = null;
 		int count = 0;
 		
-		String sql = "Select v.vehicle_num, v.model_year, v.mileage, v.price\n" + 
-				"from VEHICLE v, BLIND_INFO b\n" + 
-				"where v.vehicle_num = b.vnum\n" + 
-				"and b.order_date is null\n" + 
-				"order by v.price";
+		String sql = "Select distinct v.vehicle_num, v.model_year, c.c_type, m.model_name, d.detail_name, v.price\n" + 
+				"				from ((((VEHICLE v join BLIND_INFO b on v.vehicle_num = b.vnum) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join category c on v.ctnum = c.c_id)\n" + 
+				"				where b.order_date is null\n" + 
+				"				order by v.price";
 		
 		try {
 			stmt = Main.conn.createStatement();
@@ -74,17 +72,19 @@ public class Menu2 {
 			e.printStackTrace();
 		}
 		
-		System.out.println("번호       차량번호       연식                       마일리지      가격");
+		System.out.println("번호       차량번호       연식                         차종         모델명           가격");
 		try {
 			while(rs.next()) {
 				String vnum = rs.getString(1);
 				String Myear = rs.getString(2);
-				String mileage = rs.getString(3);
-				String price = rs.getString(4);
+				String ctype = rs.getString(3);
+				String modelname = rs.getString(4);
+				String d_model = rs.getString(5);
+				String price = rs.getString(6);
 				
 				count++;
 				
-				System.out.printf("%-3d %12s %17s %15s %10s\n", count, vnum, Myear, mileage, price);
+				System.out.printf("%-3d %12s %17s %14s %10s %7s %10s\n", count, vnum, Myear, ctype ,modelname, d_model, price);
 			}
 			
 			if(count == 0) {
@@ -102,6 +102,9 @@ public class Menu2 {
 		ResultSet rs = null;
 		Statement stmt = null;
 		int count = 0;
+		int menuNum;
+		
+		Scanner scan = new Scanner(System.in);
 		
 		String makerlist = "select maker_name from MAKER";
 		
@@ -125,18 +128,56 @@ public class Menu2 {
 			e.printStackTrace();
 		}
 		
-		//해당 maker검색 
+		menuNum = scan.nextInt();
+		menuNum -= 1; // 메뉴 번호와 maker_id와 맞추기 위해 조정함 
+		//해당 maker검색
+		String sql = "Select distinct v.vehicle_num, v.model_year, c.c_type, m.model_name, d.detail_name, v.price\n" + 
+				"								from ((((VEHICLE v join BLIND_INFO b on v.vehicle_num = b.vnum) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join category c on v.ctnum = c.c_id) \n" + 
+				"								where b.order_date is null \n" + 
+				"                                and m.maker_no = " + menuNum + "\n" + 
+				"								order by v.price";
 		
+		try {
+			rs = stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("번호       차량번호       연식                         차종           모델명             가격");
+		try {
+			count = 0;
+			while(rs.next()) {
+				String vnum = rs.getString(1);
+				String Myear = rs.getString(2);
+				String ctype = rs.getString(3);
+				String modelname = rs.getString(4);
+				String d_model = rs.getString(5);
+				String price = rs.getString(6);
+				
+				count++;
+				
+				System.out.printf("%-3d %12s %17s %14s %10s %7s %10s\n", count, vnum, Myear, ctype ,modelname, d_model, price);
+			}
+			
+			if(count == 0) {
+				System.out.println("\n현재 구매 가능한 차량이 없습니다.");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		//show selected
 		
-		
-		
-		
-		
+
 	}
 	
 	
 	//조건별로 검색하여 보여줌
 	public static void show_Condition_listed() {
+		
+		
 		
 	}
 	
@@ -153,6 +194,10 @@ public class Menu2 {
 	
 	//차량을 구매함 
 	public static void buycar() {
+		System.out.println("구매하려는 차량의 차량번호를 입력하세요 : ");
+		
+		
+		
 		
 	}
 	
