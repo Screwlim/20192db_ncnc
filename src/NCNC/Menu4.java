@@ -3,7 +3,7 @@ package NCNC;
 import java.sql.*;
 import java.util.Scanner;
 
-//ê±°ë˜ ë‚´ì—­ ê¸°ëŠ¥
+//°Å·¡ ³»¿ª ±â´É
 public class Menu4 {
 	public static Scanner scan = null;
 	
@@ -24,45 +24,45 @@ public class Menu4 {
 			e.printStackTrace();
 		}
 
-		System.out.println("[ê´€ë¦¬ì ê¸°ëŠ¥ì…ë‹ˆë‹¤.]");
+		System.out.println("[°ü¸®ÀÚ ±â´ÉÀÔ´Ï´Ù.]");
 
-		// ì‚¬ìš©ìë¡œ í™”ë©´(ê±°ë˜ë‚´ì—­ë§Œ ì§€ì›)
+		// »ç¿ëÀÚ·Î È­¸é(°Å·¡³»¿ª¸¸ Áö¿ø)
 		if (Main.admin == false) {
-			System.out.println("ì˜ëª»ëœ ì ‘ê·¼ì…ë‹ˆë‹¤.");
+			System.out.println("Àß¸øµÈ Á¢±ÙÀÔ´Ï´Ù.");
 			return;
 		} else if (Main.admin == true) {
 
 			while (true) {
-				// ê´€ë¦¬ìì¼ ê²½ìš°
-				System.out.println("1. ìƒˆ ë§¤ë¬¼ë“±ë¡");
-				System.out.println("2. ë“±ë¡ ì°¨ëŸ‰ ìˆ˜ì •");
-				System.out.println("3. ë¹„ê³µê°œ ì²˜ë¦¬");
-				System.out.println("4. ëŒì•„ê°€ê¸°");
-				System.out.print("\në©”ë‰´ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+				// °ü¸®ÀÚÀÏ °æ¿ì
+				System.out.println("1. »õ ¸Å¹°µî·Ï");
+				System.out.println("2. µî·Ï Â÷·® ¼öÁ¤");
+				System.out.println("3. ºñ°ø°³ Ã³¸®");
+				System.out.println("4. µ¹¾Æ°¡±â");
+				System.out.print("\n¸Ş´º¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
 
 				menuNum = scan.nextInt();
 				scan.nextLine();
 				
 				switch (menuNum) {
 				case 1:
-					// [ìƒˆ ë§¤ë¬¼ë“±ë¡]
+					// [»õ ¸Å¹°µî·Ï]
 					insertForSale();
 					break;
 
 				case 2:
-					// [ë“±ë¡ ì°¨ëŸ‰ ìˆ˜ì •]
+					// [µî·Ï Â÷·® ¼öÁ¤]
 					updateForSale();
 					break;
 
 				case 3:
-					// [ë¹„ê³µê°œ ì²˜ë¦¬]
+					// [ºñ°ø°³ Ã³¸®]
 					blindForSale();
 					break;
 
 				case 4:
 					return;
 				default:
-					System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤!");
+					System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù!");
 				}
 			}
 		}
@@ -77,7 +77,7 @@ public class Menu4 {
 		
 		
 
-		System.out.println("[ìƒˆ ë§¤ë¬¼ë“±ë¡]");
+		System.out.println("[»õ ¸Å¹°µî·Ï]");
 		
 		
 		try {
@@ -90,7 +90,7 @@ public class Menu4 {
 			}
 			
 			while(true) {
-				System.out.print("ë§¤ë¬¼ ë“±ë¡ìì˜ IDë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+				System.out.print("¸Å¹° µî·ÏÀÚÀÇ ID¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
 
 				orderID = scan.nextLine();
 				
@@ -103,17 +103,17 @@ public class Menu4 {
 				}
 				
 				if(exist == true) {
-					System.out.println("ìœ íš¨í•œ ID ì…ë‹ˆë‹¤");
+					System.out.println("À¯È¿ÇÑ ID ÀÔ´Ï´Ù");
 					exist = false;
 					break;
 				}
 				else {
-					System.out.println("ìœ íš¨í•˜ì§€ì•Šì€ ID ì…ë‹ˆë‹¤");
+					System.out.println("À¯È¿ÇÏÁö¾ÊÀº ID ÀÔ´Ï´Ù");
 				}
 			}
 			
 			while(true) {
-				System.out.print("ë§¤ë¬¼ì˜ ì°¨ëŸ‰ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+				System.out.print("¸Å¹°ÀÇ Â÷·®¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
 
 				orderVnum = scan.nextLine();
 				
@@ -126,16 +126,17 @@ public class Menu4 {
 				}
 				
 				if(exist == true) {
-					System.out.println("ìœ íš¨í•œ Vnum ì…ë‹ˆë‹¤");
+					System.out.println("À¯È¿ÇÑ Vnum ÀÔ´Ï´Ù");
 					exist = false;
 					break;
 				}
 				else {
-					System.out.println("ìœ íš¨í•˜ì§€ì•Šì€ Vnum ì…ë‹ˆë‹¤");
+					System.out.println("À¯È¿ÇÏÁö¾ÊÀº Vnum ÀÔ´Ï´Ù");
 				}
 			}
 			
-			sql = "select * from Order_info where Vnum = '" + orderVnum +"'";
+			sql = "select * from Order_info where buyer is null and 1"
+					+ "Vnum = '" + orderVnum +"'";
 			
 			rs = stmt.executeQuery(sql);
 			
@@ -144,7 +145,7 @@ public class Menu4 {
 			}
 			
 			if ( exist == true ) {
-				System.out.println("ë™ì¼í•œ ì°¨ëŸ‰ì´ ì´ë¯¸ ë“±ë¡ë˜ì–´ìˆìŠµë‹ˆë‹¤.");
+				System.out.println("µ¿ÀÏÇÑ Â÷·®ÀÌ ÀÌ¹Ì µî·ÏµÇ¾îÀÖ½À´Ï´Ù.");
 				return;
 			}
 			else {
@@ -153,10 +154,10 @@ public class Menu4 {
 				int res = stmt.executeUpdate(sql);
 				
 				if(res == 0) {
-					System.out.println("ë‹¤ì‹œ ì‹œë„í•´ ì£¼ì„¸ìš”!");
+					System.out.println("´Ù½Ã ½ÃµµÇØ ÁÖ¼¼¿ä!");
 				}
 				else if (res == 1){
-					System.out.println("ë§¤ë¬¼ì´ ì •ìƒì ìœ¼ë¡œ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤!");
+					System.out.println("¸Å¹°ÀÌ Á¤»óÀûÀ¸·Î µî·ÏµÇ¾ú½À´Ï´Ù!");
 					Main.conn.commit();
 				}
 			}
@@ -189,50 +190,59 @@ public class Menu4 {
 		
 		boolean exist = false;
 		
-		System.out.println("[ë“±ë¡ ì°¨ëŸ‰ ìˆ˜ì •]");
+		System.out.println("[µî·Ï Â÷·® ¼öÁ¤]");
 		
-		//ìš°ì„  ì°¨ëŸ‰ ë²ˆí˜¸ ë°›ê³ , ìˆëŠ”ì§€ ì¡°ì‚¬í•œ í›„, ìˆ˜ì •í•  ê°’ì„ ë°›ëŠ”ë‹¤.
+		//¿ì¼± Â÷·® ¹øÈ£ ¹Ş°í, ÀÖ´ÂÁö Á¶»çÇÑ ÈÄ, ¼öÁ¤ÇÒ °ªÀ» ¹Ş´Â´Ù.
 		
 		try {
 			while(true) {
-				System.out.print("ìˆ˜ì •í•  ë§¤ë¬¼ì˜ ì°¨ëŸ‰ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+				System.out.print("¼öÁ¤ÇÒ ¸Å¹°ÀÇ Â÷·®¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
 				vehicleNum = scan.nextLine();
 				
 				sql = "select * from order_info where buyer is null and vnum = '" + vehicleNum + "'";
 
 				rs = stmt.executeQuery(sql);
 				
-				while(rs.next()) {
-					model_year = rs.getString(2);
-					mileage = rs.getInt(3);
-					price = rs.getInt(4);
-					Fnum = rs.getInt(5);
-					Cnum = rs.getInt(6);
-					Ctnum = rs.getInt(7);
-					Enum = rs.getInt(8);
-					Tnum = rs.getInt(9);
-					Dnum = rs.getInt(10);
+				if(rs.next()) {
 					exist = true;
 				}
 				
 				if(exist == true) {
-					System.out.println("ìœ íš¨í•œ ì°¨ëŸ‰ë²ˆí˜¸ì…ë‹ˆë‹¤.");
+					System.out.println("À¯È¿ÇÑ Â÷·®¹øÈ£ÀÔ´Ï´Ù.");
 					break;
 				}
 				else {
-					System.out.println("ìœ íš¨í•˜ì§€ì•Šì€ ì°¨ëŸ‰ë²ˆí˜¸ì…ë‹ˆë‹¤.");
+					System.out.println("À¯È¿ÇÏÁö¾ÊÀº Â÷·®¹øÈ£ÀÔ´Ï´Ù.");
 				}
 			}
 			
 			rs.close();
 			
-			System.out.println("ì°¨ëŸ‰ì˜ ìˆ˜ì •í•  ì •ë³´ë¥¼ ì…ë ¥í•˜ì„¸ìš”. (ìˆ˜ì •ì„ ì›ì¹˜ì•Šìœ¼ë©´, ê³µë°±ì„ ì…ë ¥)");
+			sql = "select * from vehicle where vehicle_num = '" + vehicleNum + "'";
+
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				model_year = rs.getString(2);
+				mileage = rs.getInt(3);
+				price = rs.getInt(4);
+				Fnum = rs.getInt(5);
+				Cnum = rs.getInt(6);
+				Ctnum = rs.getInt(7);
+				Enum = rs.getInt(8);
+				Tnum = rs.getInt(9);
+				Dnum = rs.getInt(10);
+			}
+			
+			System.out.println("Â÷·®ÀÇ ¼öÁ¤ÇÒ Á¤º¸¸¦ ÀÔ·ÂÇÏ¼¼¿ä. (¼öÁ¤À» ¿øÄ¡¾ÊÀ¸¸é, °ø¹éÀ» ÀÔ·Â)");
 			
 			sb1.append("update vehicle set ");
 			
+			boolean isFirst = true;
+			
 			while(true) {
 				
-				System.out.print("ì—°ì‹ (yyyy-mm-dd) (í˜„ì¬ : " + model_year +  ") : ");
+				System.out.print("¿¬½Ä (yyyy-mm-dd) (ÇöÀç : " + model_year +  ") : ");
 				
 				model_year = scan.nextLine().trim();
 				
@@ -240,7 +250,7 @@ public class Menu4 {
 					break;
 								
 				if (!model_year.matches("\\d{4}-\\d{2}-\\d{2}"))
-				   System.out.println("í˜•ì‹ì— ë§ì¶° ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”!");
+				   System.out.println("Çü½Ä¿¡ ¸ÂÃç ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä!");
 				else
 					break;
 				
@@ -248,28 +258,41 @@ public class Menu4 {
 			
 			if(!model_year.equals("")) {
 				change = true;
+				isFirst = false;
 				sb1.append("model_year = to_date('" + model_year + "', 'yyyy-mm-dd')");
 			}
 			
 			
 			
-			System.out.print("ì£¼í–‰ê±°ë¦¬ (í˜„ì¬ : " + mileage + ") : ");
+			System.out.print("ÁÖÇà°Å¸® (ÇöÀç : " + mileage + ") : ");
 			
 			Stemp = scan.nextLine().trim();
 			
 			if(!Stemp.equals("")) {
 				change = true;
-				sb1.append(", mileage = " + Integer.valueOf(Stemp));
+				
+				if(isFirst) {
+					sb1.append("mileage = " + Integer.valueOf(Stemp));
+					isFirst = false;
+				}else {
+					sb1.append(", mileage = " + Integer.valueOf(Stemp));
+				}
 			}
 			
 			
-			System.out.print("ê°€ê²© (í˜„ì¬ : " + price + "): ");
+			System.out.print("°¡°İ (ÇöÀç : " + price + "): ");
 			
 			Stemp = scan.nextLine().trim();
 			
 			if(!Stemp.equals("")) {
 				change = true;
-				sb1.append(", price = " + Integer.valueOf(Stemp));
+				
+				if(isFirst) {
+					sb1.append("price = " + Integer.valueOf(Stemp));
+					isFirst = false;
+				}else {
+					sb1.append(", price = " + Integer.valueOf(Stemp));
+				}
 			}
 			
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -291,11 +314,11 @@ public class Menu4 {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				System.out.println("ë²ˆí˜¸ : " + String.valueOf(rs.getInt("fuel_id")) + ", ì¢…ë¥˜ : " + rs.getString("fuel_type"));
+				System.out.println("¹øÈ£ : " + String.valueOf(rs.getInt("fuel_id")) + ", Á¾·ù : " + rs.getString("fuel_type"));
 			}
 			
 			while(true) {
-				System.out.print("ì—°ë£Œ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” (í˜„ì¬ : "+ Fnum +") : ");
+				System.out.print("¿¬·á ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä (ÇöÀç : "+ Fnum +") : ");
 				Stemp = scan.nextLine().trim();
 				
 				if(Stemp.equals(""))
@@ -305,14 +328,20 @@ public class Menu4 {
 					break;
 				}
 				else {
-					System.out.println("ë²”ìœ„ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+					System.out.println("¹üÀ§¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 				}
 				
 			}
 
 			if(!Stemp.equals("")) {
 				change = true;
-				sb1.append(", Fnum = " + Integer.parseInt(Stemp));
+				
+				if(isFirst) {
+					sb1.append("Fnum = " + Integer.parseInt(Stemp));
+					isFirst = false;
+				}else {
+					sb1.append(", Fnum = " + Integer.parseInt(Stemp));
+				}
 			}
 			
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -333,11 +362,11 @@ public class Menu4 {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				System.out.println("ë²ˆí˜¸ : " + String.valueOf(rs.getInt("color_id")) + ", ì¢…ë¥˜ : " + rs.getString("color_name"));
+				System.out.println("¹øÈ£ : " + String.valueOf(rs.getInt("color_id")) + ", Á¾·ù : " + rs.getString("color_name"));
 			}
 			
 			while(true) {
-				System.out.print("ìƒ‰ìƒì„ ì…ë ¥í•˜ì„¸ìš” (í˜„ì¬ : "+ Cnum +") : ");
+				System.out.print("»ö»óÀ» ÀÔ·ÂÇÏ¼¼¿ä (ÇöÀç : "+ Cnum +") : ");
 				Stemp = scan.nextLine().trim();
 				
 				if(Stemp.equals(""))
@@ -347,14 +376,21 @@ public class Menu4 {
 					break;
 				}
 				else {
-					System.out.println("ë²”ìœ„ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+					System.out.println("¹üÀ§¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 				}
 				
 			}
 
 			if(!Stemp.equals("")) {
 				change = true;
-				sb1.append(", Cnum = " + Integer.parseInt(Stemp));
+				
+				if(isFirst) {
+					sb1.append("Cnum = " + Integer.parseInt(Stemp));
+					isFirst = false;
+				}else {
+					sb1.append(", Cnum = " + Integer.parseInt(Stemp));
+				}
+				
 			}
 			
 			
@@ -377,11 +413,11 @@ public class Menu4 {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				System.out.println("ë²ˆí˜¸ : " + String.valueOf(rs.getInt("c_id")) + ", ì¢…ë¥˜ : " + rs.getString("c_type"));
+				System.out.println("¹øÈ£ : " + String.valueOf(rs.getInt("c_id")) + ", Á¾·ù : " + rs.getString("c_type"));
 			}
 			
 			while(true) {
-				System.out.print("ì¹´í…Œê³ ë¦¬ (í˜„ì¬ : "+ Ctnum +") : ");
+				System.out.print("Ä«Å×°í¸® (ÇöÀç : "+ Ctnum +") : ");
 				Stemp = scan.nextLine().trim();
 				
 				if(Stemp.equals(""))
@@ -391,14 +427,20 @@ public class Menu4 {
 					break;
 				}
 				else {
-					System.out.println("ë²”ìœ„ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+					System.out.println("¹üÀ§¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 				}
 				
 			}
 
 			if(!Stemp.equals("")) {
 				change = true;
-				sb1.append(", Ctnum = " + Integer.parseInt(Stemp));
+				
+				if(isFirst) {
+					sb1.append("Ctnum = " + Integer.parseInt(Stemp));
+					isFirst = false;
+				}else {
+					sb1.append(", Ctnum = " + Integer.parseInt(Stemp));
+				}
 			}
 			
 		
@@ -420,11 +462,11 @@ public class Menu4 {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				System.out.println("ë²ˆí˜¸ : " + String.valueOf(rs.getInt("ed_id")) + ", ì¢…ë¥˜ : " + rs.getString("ed_type"));
+				System.out.println("¹øÈ£ : " + String.valueOf(rs.getInt("ed_id")) + ", Á¾·ù : " + rs.getString("ed_type"));
 			}
 			
 			while(true) {
-				System.out.print("ë°°ê¸°ëŸ‰ (í˜„ì¬ : "+ Enum +") : ");
+				System.out.print("¹è±â·® (ÇöÀç : "+ Enum +") : ");
 				Stemp = scan.nextLine().trim();
 				
 				if(Stemp.equals(""))
@@ -434,14 +476,20 @@ public class Menu4 {
 					break;
 				}
 				else {
-					System.out.println("ë²”ìœ„ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+					System.out.println("¹üÀ§¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 				}
 				
 			}
 
 			if(!Stemp.equals("")) {
 				change = true;
-				sb1.append(", Enum = " + Integer.parseInt(Stemp));
+				
+				if(isFirst) {
+					sb1.append("Enum = " + Integer.parseInt(Stemp));
+					isFirst = false;
+				}else {
+					sb1.append(", Enum = " + Integer.parseInt(Stemp));
+				}
 			}
 		
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -464,11 +512,11 @@ public class Menu4 {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				System.out.println("ë²ˆí˜¸ : " + String.valueOf(rs.getInt("t_id")) + ", ì¢…ë¥˜ : " + rs.getString("t_type"));
+				System.out.println("¹øÈ£ : " + String.valueOf(rs.getInt("t_id")) + ", Á¾·ù : " + rs.getString("t_type"));
 			}
 			
 			while(true) {
-				System.out.print("íŠ¸ëœìŠ¤ë¯¸ì…˜ (í˜„ì¬ : "+ Tnum +") : ");
+				System.out.print("Æ®·£½º¹Ì¼Ç (ÇöÀç : "+ Tnum +") : ");
 				Stemp = scan.nextLine().trim();
 				
 				if(Stemp.equals(""))
@@ -478,19 +526,25 @@ public class Menu4 {
 					break;
 				}
 				else {
-					System.out.println("ë²”ìœ„ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+					System.out.println("¹üÀ§¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 				}
 				
 			}
 
 			if(!Stemp.equals("")) {
 				change = true;
-				sb1.append(", Tnum = " + Integer.parseInt(Stemp));
+				
+				if(isFirst) {
+					sb1.append("Tnum = " + Integer.parseInt(Stemp));
+					isFirst = false;
+				}else {
+					sb1.append(", Tnum = " + Integer.parseInt(Stemp));
+				}	
 			}
 			
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
-			//ë©”ì´ì»¤ ë½‘ê³ , ëª¨ë¸ ë½‘ê³ , ì„¸ë¶€ ëª¨ë¸ ë½‘ì•„ì„œ ì ìš©ì‹œí‚¤ì..
+			//¸ŞÀÌÄ¿ »Ì°í, ¸ğµ¨ »Ì°í, ¼¼ºÎ ¸ğµ¨ »Ì¾Æ¼­ Àû¿ë½ÃÅ°ÀÚ..
 			
 			sql = "select min(maker_id), max(maker_id) from maker";
 			
@@ -509,11 +563,11 @@ public class Menu4 {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				System.out.println("ë²ˆí˜¸ : " + String.valueOf(rs.getInt("maker_id")) + ", ì¢…ë¥˜ : " + rs.getString("maker_name"));
+				System.out.println("¹øÈ£ : " + String.valueOf(rs.getInt("maker_id")) + ", Á¾·ù : " + rs.getString("maker_name"));
 			}
 			
 			while(true) {
-				System.out.print("ì œì¡°ì‚¬ë¥¼ ì„ íƒí•˜ì„¸ìš” : ");
+				System.out.print("Á¦Á¶»ç¸¦ ¼±ÅÃÇÏ¼¼¿ä : ");
 				Stemp = scan.nextLine().trim();
 				
 				if(Stemp.equals(""))
@@ -523,7 +577,7 @@ public class Menu4 {
 					break;
 				}
 				else {
-					System.out.println("ë²”ìœ„ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+					System.out.println("¹üÀ§¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 				}
 				
 			}
@@ -555,11 +609,11 @@ public class Menu4 {
 				rs = stmt.executeQuery(sql);
 				
 				while(rs.next()) {
-					System.out.println("ë²ˆí˜¸ : " + String.valueOf(rs.getInt("model_id")) + ", ì¢…ë¥˜ : " + rs.getString("model_name"));
+					System.out.println("¹øÈ£ : " + String.valueOf(rs.getInt("model_id")) + ", Á¾·ù : " + rs.getString("model_name"));
 				}
 				
 				while(true) {
-					System.out.print("ëª¨ë¸ì„ ì„ íƒí•˜ì„¸ìš” : ");
+					System.out.print("¸ğµ¨À» ¼±ÅÃÇÏ¼¼¿ä : ");
 					Stemp = scan.nextLine().trim();
 					
 					if(Stemp.equals(""))
@@ -569,7 +623,7 @@ public class Menu4 {
 						break;
 					}
 					else {
-						System.out.println("ë²”ìœ„ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+						System.out.println("¹üÀ§¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 					}
 					
 				}
@@ -601,11 +655,11 @@ public class Menu4 {
 					rs = stmt.executeQuery(sql);
 					
 					while(rs.next()) {
-						System.out.println("ë²ˆí˜¸ : " + String.valueOf(rs.getInt("detail_id")) + ", ì¢…ë¥˜ : " + rs.getString("detail_id"));
+						System.out.println("¹øÈ£ : " + String.valueOf(rs.getInt("detail_id")) + ", Á¾·ù : " + rs.getString("detail_name"));
 					}
 					
 					while(true) {
-						System.out.print("ì„¸ë¶€ ëª¨ë¸ì„ ì„ íƒí•˜ì„¸ìš” : ");
+						System.out.print("¼¼ºÎ ¸ğµ¨À» ¼±ÅÃÇÏ¼¼¿ä : ");
 						Stemp = scan.nextLine().trim();
 						
 						if(Stemp.equals(""))
@@ -615,14 +669,21 @@ public class Menu4 {
 							break;
 						}
 						else {
-							System.out.println("ë²”ìœ„ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+							System.out.println("¹üÀ§¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 						}
 						
 					}
 					
 					if(!Stemp.equals("")) {
 						change = true;
-						sb1.append(", Dnum = " + Integer.parseInt(Stemp));
+						
+						if(isFirst) {
+							sb1.append(", Dnum = " + Integer.parseInt(Stemp));
+							isFirst = false;
+						}else {
+							sb1.append(", Dnum = " + Integer.parseInt(Stemp));
+						}
+						
 					}
 					
 				}
@@ -633,20 +694,23 @@ public class Menu4 {
 			if(change == true) {
 				sb1.append(" where vehicle_num = '" + vehicleNum +"'");
 				
-				int res = stmt.executeUpdate(sb1.toString());
-				
 			//	System.out.println(sb1.toString());
 				
+				sql = sb1.toString();
+				
+				int res = stmt.executeUpdate(sql);
+				
 				if(res == 1) {
-					System.out.println("ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+					System.out.println("Á¤»óÀûÀ¸·Î Ã³¸® µÇ¾ú½À´Ï´Ù.");
+					Main.conn.commit();
 				}
 				else {
-					System.out.println("ë‹¤ì‹œ ì‹œë„í•´ ì£¼ì„¸ìš”!");
+					System.out.println("´Ù½Ã ½ÃµµÇØ ÁÖ¼¼¿ä!");
 				}
 				
 			}
 			else {
-				System.out.println("ê°±ì‹ í•˜ì§€ì•Šê³  ì¢…ë£Œí•©ë‹ˆë‹¤.");
+				System.out.println("°»½ÅÇÏÁö¾Ê°í Á¾·áÇÕ´Ï´Ù.");
 			}
 			
 		} catch (SQLException e) {
@@ -659,29 +723,29 @@ public class Menu4 {
 		String sql = null;
 		String Stemp = null;
 		
-		System.out.println("[ë¹„ê³µê°œ ì²˜ë¦¬]");
+		System.out.println("[ºñ°ø°³ Ã³¸®]");
 		
 		try {
 			
 			while(true) {
-				System.out.print("ë¹„ê³µê°œ ë“±ë¡ì„ ì›í•˜ë©´ Y(y), ë¹„ê³µê°œ í•´ì œë¥¼ ì›í•˜ë©´ N(n)ì„ ì…ë ¥í•˜ì„¸ìš”. : ");
+				System.out.print("ºñ°ø°³ µî·ÏÀ» ¿øÇÏ¸é Y(y), ºñ°ø°³ ÇØÁ¦¸¦ ¿øÇÏ¸é N(n)À» ÀÔ·ÂÇÏ¼¼¿ä. : ");
 				Stemp = scan.nextLine().trim();
 				
 				if(Stemp.equals("Y") || Stemp.equals("y")) {
-					//ë¹„ê³µê°œ ë“±ë¡
+					//ºñ°ø°³ µî·Ï
 
 					while(true) {
 						
-						System.out.print("ë¹„ê³µê°œ ì²˜ë¦¬í•  ë§¤ë¬¼ì˜ ORDER_NUMì„ ì…ë ¥í•˜ì„¸ìš”! (ì›ì¹˜ì•Šìœ¼ë©´ ê³µë°±ì„ ì…ë ¥í•˜ì„¸ìš”) : ");
+						System.out.print("ºñ°ø°³ Ã³¸®ÇÒ ¸Å¹°ÀÇ ORDER_NUMÀ» ÀÔ·ÂÇÏ¼¼¿ä! (¿øÄ¡¾ÊÀ¸¸é °ø¹éÀ» ÀÔ·ÂÇÏ¼¼¿ä) : ");
 						Stemp = scan.nextLine().trim();
 						
 						if(Stemp.equals("")) {
-							System.out.println("ë§¤ë¬¼ ë¹„ê³µê°œë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.");
+							System.out.println("¸Å¹° ºñ°ø°³¸¦ Á¾·áÇÕ´Ï´Ù.");
 							break;
 						}
 						else {
 							if(!Stemp.matches("^[0-9]*$")) {
-								System.out.println("ìˆ«ìë§Œ ì…ë ¥í•˜ì„¸ìš”!");
+								System.out.println("¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä!");
 							}
 							else {
 								
@@ -690,11 +754,11 @@ public class Menu4 {
 								rs = stmt.executeQuery(sql);
 								
 								if(rs.next()) {
-									System.out.println("ì´ë¯¸ ë¹„ê³µê°œ ë“±ë¡ëœ ë§¤ë¬¼ì…ë‹ˆë‹¤.");
+									System.out.println("ÀÌ¹Ì ºñ°ø°³ µî·ÏµÈ ¸Å¹°ÀÔ´Ï´Ù.");
 									break;
 								}
 								
-								//íŒë§¤ì¤‘ì¸ ë§¤ë¬¼ì—ì„œ ì…ë ¥ë°›ì€ ORDER_NUMì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸.
+								//ÆÇ¸ÅÁßÀÎ ¸Å¹°¿¡¼­ ÀÔ·Â¹ŞÀº ORDER_NUMÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎ.
 								sql = "select * from order_info where buyer is null and Order_num = " + String.valueOf(Stemp);
 								
 								rs = stmt.executeQuery(sql);
@@ -707,41 +771,42 @@ public class Menu4 {
 									int res = stmt.executeUpdate(sql);
 									
 									if ( res == 0 ) {
-										System.out.println("ë¹„ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ ë˜ì—ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”");
+										System.out.println("ºñÁ¤»óÀûÀ¸·Î Ã³¸® µÇ¾ú½À´Ï´Ù. ´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä");
 										break;
 									}
 									else {
-										System.out.println("ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+										System.out.println("Á¤»óÀûÀ¸·Î Ã³¸® µÇ¾ú½À´Ï´Ù.");
+										Main.conn.commit();
 										break;
 									}
 								}
 								else {
-									System.out.println("íŒë§¤ì¤‘ì¸ ë§¤ë¬¼ì—ì„œ ì¼ì¹˜í•˜ëŠ” ë§¤ë¬¼ì´ ì¡´ì¬í•˜ì§€ì•ŠìŠµë‹ˆë‹¤.");
+									System.out.println("ÆÇ¸ÅÁßÀÎ ¸Å¹°¿¡¼­ ÀÏÄ¡ÇÏ´Â ¸Å¹°ÀÌ Á¸ÀçÇÏÁö¾Ê½À´Ï´Ù.");
 									break;
 								}
 								
 							}
 						}					
 					}
-					//ë¹„ê³µê°œ ë“±ë¡ ì™„ë£Œ
+					//ºñ°ø°³ µî·Ï ¿Ï·á
 					break;
 					
 				}
 				else if(Stemp.equals("N") || Stemp.equals("n")) {
-					//ë¹„ê³µê°œ í•´ì œ
+					//ºñ°ø°³ ÇØÁ¦
 					
 					while(true) {
 						
-						System.out.print("ë¹„ê³µê°œ ì²˜ë¦¬ í•´ì œí•  ë§¤ë¬¼ì˜ ORDER_NUMì„ ì…ë ¥í•˜ì„¸ìš”! (ì›ì¹˜ì•Šìœ¼ë©´ ê³µë°±ì„ ì…ë ¥í•˜ì„¸ìš”) : ");
+						System.out.print("ºñ°ø°³ Ã³¸® ÇØÁ¦ÇÒ ¸Å¹°ÀÇ ORDER_NUMÀ» ÀÔ·ÂÇÏ¼¼¿ä! (¿øÄ¡¾ÊÀ¸¸é °ø¹éÀ» ÀÔ·ÂÇÏ¼¼¿ä) : ");
 						Stemp = scan.nextLine().trim();
 						
 						if(Stemp.equals("")) {
-							System.out.println("ë§¤ë¬¼ ë¹„ê³µê°œ í•´ì œë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.");
+							System.out.println("¸Å¹° ºñ°ø°³ ÇØÁ¦¸¦ Á¾·áÇÕ´Ï´Ù.");
 							break;
 						}
 						else {
 							if(!Stemp.matches("^[0-9]*$")) {
-								System.out.println("ìˆ«ìë§Œ ì…ë ¥í•˜ì„¸ìš”!");
+								System.out.println("¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä!");
 							}
 							else {
 								
@@ -756,26 +821,28 @@ public class Menu4 {
 									int res = stmt.executeUpdate(sql);
 									
 									if ( res == 0 ) {
-										System.out.println("ë¹„ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ ë˜ì—ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”");
+										System.out.println("ºñÁ¤»óÀûÀ¸·Î Ã³¸® µÇ¾ú½À´Ï´Ù. ´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä");
 										break;
 									}
 									else {
-										System.out.println("ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+										System.out.println("Á¤»óÀûÀ¸·Î Ã³¸® µÇ¾ú½À´Ï´Ù.");
+										Main.conn.commit();
 										break;
 									}
 								}
 								else {
-									System.out.println("ë¹„ê³µê°œ ë“±ë¡ë˜ì§€ì•Šì€ ë§¤ë¬¼ì…ë‹ˆë‹¤.");
+									System.out.println("ºñ°ø°³ µî·ÏµÇÁö¾ÊÀº ¸Å¹°ÀÔ´Ï´Ù.");
 									break;
+									
 								}
 							}
 						}					
 					}
-					//ë¹„ê³µê°œ í•´ì œ ì™„ë£Œ
+					//ºñ°ø°³ ÇØÁ¦ ¿Ï·á
 					break;
 				}
 				else {
-					System.out.println("ì…ë ¥ì´ ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.");
+					System.out.println("ÀÔ·ÂÀÌ ¹Ù¸£Áö ¾Ê½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.");
 				}
 			}
 			
