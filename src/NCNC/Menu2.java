@@ -114,7 +114,7 @@ public class Menu2 {
 
 		// 상세정보 보기
 		while (true) {
-			System.out.println("상세히 보기를 원하시면 y, 메뉴로 돌아가려면 아무 키나 입력하세요. : ");
+			System.out.println("상세히 보기를 원하시면 y, 메뉴로 돌아가려면 다른 아무 키나 입력하세요. : ");
 			String Vnum = scan.nextLine();
 
 			if (Vnum.equals("y")) {
@@ -197,7 +197,7 @@ public class Menu2 {
 			} else {
 				// 상세정보 보기
 				while (true) {
-					System.out.println("상세히 보기를 원하시면 y, 메뉴로 돌아가려면 아무 키나 입력하세요. : ");
+					System.out.println("상세히 보기를 원하시면 y, 메뉴로 돌아가려면 다른 아무 키나 입력하세요. : ");
 					String Vnum = scan.nextLine();
 
 					if (Vnum.equals("y")) {
@@ -437,9 +437,7 @@ public class Menu2 {
 		String sql = "Select distinct c.vehicle_num, c.model_year, c.c_type, c.model_name, c.detail_name, c.price\n" + 
 				"from car_info c\n" + category + maker + fuel + ed + color + 
 				"order by c.price";
-		
-		System.out.println("조건 sql : " + sql);
-		
+				
 		try {
 			stmt  = Main.conn.createStatement();
 			
@@ -449,7 +447,7 @@ public class Menu2 {
 			e.printStackTrace();
 		}
 		
-		System.out.println("조건 검색결과 입니다.\n번호       차량번호       연식                         차종           모델명             가격");
+		System.out.println("\n조건 검색결과 입니다.\n번호       차량번호       연식                         차종           모델명             가격");
 		try {
 			int count = 0;
 			while (rs.next()) {
@@ -471,7 +469,7 @@ public class Menu2 {
 			} else {
 				// 상세정보 보기
 				while (true) {
-					System.out.println("상세히 보기를 원하시면 y, 메뉴로 돌아가려면 아무 키나 입력하세요. : ");
+					System.out.println("상세히 보기를 원하시면 y, 메뉴로 돌아가려면 다른 아무 키나 입력하세요. : ");
 					String Vnum = scan.nextLine();
 
 					if (Vnum.equals("y")) {
@@ -505,8 +503,6 @@ public class Menu2 {
 		String sql = "Select distinct c.vehicle_num, c.model_year, c.c_type, c.model_name, c.detail_name, c.price "
 				+ "from car_info c " + "where c.model_name = '" + modelName + "'";
 		try {
-			System.out.println(sql);
-
 			stmt = Main.conn.createStatement();
 
 			rs = stmt.executeQuery(sql);
@@ -543,7 +539,7 @@ public class Menu2 {
 
 		// 상세정보 보기
 		while (true) {
-			System.out.println("상세히 보기를 원하시면 y, 메뉴로 돌아가려면 아무 키나 입력하세요. : ");
+			System.out.println("상세히 보기를 원하시면 y, 메뉴로 돌아가려면 다른 아무 키나 입력하세요. : ");
 			String Vnum = scan.nextLine();
 
 			if (Vnum.equals("y")) {
@@ -644,10 +640,9 @@ public class Menu2 {
 			e.printStackTrace();
 		}
 
-		System.out.println("\n차량 구매를 원하시면 1을 원하지 않으면 다른 숫자를 입력하세요. : ");
-		menu = scan.nextInt();
+		System.out.println("\n차량 구매를 원하시면 y를 원하지 않으면 다른 아무 키나 입력하세요. : ");
 		String v = scan.nextLine();
-		if (menu == 1) {
+		if (v.equals("y")) {
 			buycar(vnum);
 		}
 
@@ -655,13 +650,11 @@ public class Menu2 {
 
 	// 차량을 구매함
 	public static void buycar(String vnum) {
-		ResultSet rs = null;
 		Statement stmt = null;
 
 		// order_info update
 		String sql = "update order_info\n" + "set order_date = TO_DATE( '" + "2019/11/23 03:00:00"
 				+ "', 'YYYY/MM/DD HH:MI:SS')\n" + "where order_info.vnum = '" + vnum + "'";
-		System.out.println("sql :" + sql);
 		try {
 			stmt = Main.conn.createStatement();
 
