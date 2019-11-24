@@ -219,7 +219,7 @@ public class Menu4 {
             max = rs.getInt("max(fuel_id)");
          }
 
-         sql = "select * from fuels order by feul_id";
+         sql = "select * from fuels order by fuel_id";
 
          rs = stmt.executeQuery(sql);
 
