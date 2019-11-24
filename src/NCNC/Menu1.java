@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import com.sun.jdi.connect.spi.Connection;
-
 public class Menu1 {
 
    static Scanner scan = new Scanner(System.in);
@@ -155,7 +153,7 @@ public class Menu1 {
                   System.out.print("변경하실 전화번호를 입력해 주세요 : ");
                   adPhonenum = scan.nextLine();
 
-                  if (!adName.trim().equals("")) {
+                  if (!adPhonenum.trim().equals("")) {
                      sql1 = "update account set phone_num = '" + adPhonenum + "' where id = '" + Main.id + "'";
                      rs1 = stmt.executeQuery(sql1);
                      Main.conn.commit();
@@ -178,7 +176,7 @@ public class Menu1 {
                   System.out.print("변경하실 이메일 주소를 입력해 주세요 : ");
                   adEmail = scan.nextLine();
 
-                  if (!adName.trim().equals("")) {
+                  if (!adEmail.trim().equals("")) {
                      sql1 = "update account set email_address = '" + adEmail + "' where id = '" + Main.id + "'";
                      rs1 = stmt.executeQuery(sql1);
                      Main.conn.commit();
@@ -201,7 +199,7 @@ public class Menu1 {
                   System.out.print("변경하실 집주소를 입력해 주세요 : ");
                   adAddress = scan.nextLine();
 
-                  if (!adName.trim().equals("")) {
+                  if (!adAddress.trim().equals("")) {
                      sql1 = "update account set address = '" + adAddress + "' where id = '" + Main.id + "'";
                      rs1 = stmt.executeQuery(sql1);
                      Main.conn.commit();
@@ -218,11 +216,18 @@ public class Menu1 {
                }
 
             } else if (menuNum == 5) {
-               
+
+               System.out.print("현재 회원님의 성별입니다 :");
+               if (Gender == null) {
+                  System.out.println("입력값 없음");
+               } else {
+                  System.out.println(Gender);
+               }
+
                System.out.print("변경하실 성별을 입력해 주세요 : ");
                adGender = scan.nextLine();
 
-               if (adGender.equals("")) {
+               if (!(adGender.equals("M") || adGender.equals("F"))) {
                   sql1 = "update account set gender = null where id = '" + Main.id + "'";
                } else {
                   sql1 = "update account set gender = '" + adGender + "' where id = '" + Main.id + "'";
@@ -236,24 +241,44 @@ public class Menu1 {
 
             } else if (menuNum == 6) {
 
-               System.out.print("변경하실 생일날짜를 입력해 주세요 : ");
+               System.out.print("현재 회원님의 생일입니다 :");
+               if (Birth == null) {
+                  System.out.println("입력값 없음");
+               } else {
+                  System.out.println(Birth);
+               }
+
+               System.out.print("변경하실 생일날짜를 입력해 주세요(예 : yyyy-mm-dd) : ");
                adBirth = scan.nextLine();
 
                if (adBirth.equals("")) {
                   sql1 = "update account set birth_date = null where id = '" + Main.id + "'";
-               } else {
-                  sql1 = "update account set birth_date = '" + adBirth + "' where id = '" + Main.id + "'";
+               }
+               
+               if (!adBirth.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                  System.out.println("형식에 맞지 않는 입력입니다!");
                }
 
-               rs1 = stmt.executeQuery(sql1);
-               Main.conn.commit();
+               else {
+                  sql1 = "update account set birth_date = '" + adBirth + "' where id = '" + Main.id + "'";
+                  rs1 = stmt.executeQuery(sql1);
+                  Main.conn.commit();
 
-               System.out.print("\n변경이 완료되었습니다.\n");
+                  System.out.print("\n변경이 완료되었습니다.\n");
 
-               rs1.close();
+                  rs1.close();
+               }
+
+               
 
             } else if (menuNum == 7) {
 
+               System.out.print("현재 회원님의 직업입니다 :");
+               if (Job == null) {
+                  System.out.println("입력값 없음");
+               } else {
+                  System.out.println(Job);
+               }
                System.out.print("변경하실 직업을 입력해 주세요 : ");
                adJob = scan.nextLine();
 
@@ -336,7 +361,7 @@ public class Menu1 {
 
                rs.close();
             }
-            
+
          } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

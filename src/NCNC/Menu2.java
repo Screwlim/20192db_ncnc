@@ -74,7 +74,7 @@ public class Menu2 {
 		Statement stmt = null;
 		int count = 0;
 
-		String sql = "Select distinct c.vehicle_num, c.model_year, c.c_type, c.model_name, c.detail_name, c.price\n"
+		String sql = "Select distinct c.vehicle_num, EXTRACT(YEAR FROM c.model_year) as model_year, c.c_type, c.model_name, c.detail_name, c.price\n"
 				+ "                                from car_info c\n"
 				+ "                                order by c.price";
 
@@ -162,7 +162,7 @@ public class Menu2 {
 		menuNum -= 1; // 메뉴 번호와 maker_id와 맞추기 위해 조정함
 
 		// 해당 maker검색
-		String sql = "Select distinct v.vehicle_num, v.model_year, c.c_type, m.model_name, d.detail_name, v.price\n"
+		String sql = "Select distinct v.vehicle_num, EXTRACT(YEAR FROM v.model_year) as model_year, c.c_type, m.model_name, d.detail_name, v.price\n"
 				+ "	from ((((VEHICLE v join BLIND_INFO b on v.vehicle_num = b.vnum) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join category c on v.ctnum = c.c_id) \n"
 				+ "	where b.order_date is null \n" + " and m.maker_no = " + menuNum + "\n" + "	order by v.price";
 
@@ -513,7 +513,7 @@ public class Menu2 {
 
 		modelName = scan.nextLine();
 
-		String sql = "Select distinct c.vehicle_num, c.model_year, c.c_type, c.model_name, c.detail_name, c.price "
+		String sql = "Select distinct c.vehicle_num, EXTRACT(YEAR FROM c.model_year) as model_year, c.c_type, c.model_name, c.detail_name, c.price "
 				+ "from car_info c " + "where c.model_name = '" + modelName + "'";
 		try {
 			stmt = Main.conn.createStatement();
@@ -580,7 +580,7 @@ public class Menu2 {
 		String ed_type;
 
 		// 세부정보 출력
-		String sql = "Select distinct c.vehicle_num, c.model_year, c.c_type, c.model_name, c.detail_name, c.price , c.t_type, c.ed_type\n"
+		String sql = "Select distinct c.vehicle_num, EXTRACT(YEAR FROM c.model_year) as model_year, c.c_type, c.model_name, c.detail_name, c.price , c.t_type, c.ed_type\n"
 				+ "from car_info c\n" + "where c.vehicle_num = '" + vnum + "'";
 
 		try {

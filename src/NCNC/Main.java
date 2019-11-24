@@ -72,12 +72,11 @@ public class Main {
 						scan.nextLine();
 
 						if (subMenuNum == 1) {
-
+							Menu1.main();
 						} else if (subMenuNum == 2) {
 							Menu2.main();
-
 						} else if (subMenuNum == 3) {
-
+							Menu3.main();
 						} else if (subMenuNum == 4) {
 							Main.id = null;
 							Main.admin = false;
@@ -105,11 +104,11 @@ public class Main {
 						scan.nextLine();
 
 						if (subMenuNum == 1) {
-
+							Menu1.main();
 						} else if (subMenuNum == 2) {
-
+							Menu2.main();
 						} else if (subMenuNum == 3) {
-
+							Menu3.main();
 						} else if (subMenuNum == 4) {
 							Menu4.main();
 						} else if (subMenuNum == 5) {
