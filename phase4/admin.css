@@ -1,0 +1,165 @@
+body
+{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#img
+{
+    filter: brightness(75%);
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
+.up
+{
+    flex: 15%;
+}
+
+.center
+{
+    margin-left: 20%;
+    margin-right: 20%;
+    flex: 70%;
+    background-color: rgb(221, 215, 215);
+    border-radius: 5px;
+}
+
+.down
+{
+    flex: 15%;
+}
+
+.box
+{
+    display: flex;
+}
+
+/* -------------------------state------------------------ */
+.box>.state
+{
+    margin: 10px;
+    flex:10%;
+}
+
+#user
+{
+    margin-top: 20px;
+}
+
+#user>#mystate
+{
+    border-radius: 5px;
+    background-color: whitesmoke;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#user>#mystate span
+{   
+    margin: 5px;
+    font-size: 10px;
+}
+
+#user>#mystatebody
+{
+    margin-bottom: 50px;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 90%;
+}
+
+
+#user>#mystate img
+{
+    margin-right: 2px;
+    height: 12px;
+}
+
+#user .button1
+{
+    margin-bottom: 10px;
+    display:inline-block;
+    border:none;
+    border-radius: 5px;
+    background-color: rgb(46, 44, 44);
+    cursor: pointer;
+    width: 142px;
+    color: white;
+}
+#user .button2
+{
+    margin-bottom: 10px;
+    display:inline-block;
+    border:none;
+    border-radius: 5px;
+    background-color: rgb(46, 44, 44);
+    cursor: pointer;
+    width: 142px;
+    color: white;
+}
+#user .button3
+{
+    margin-bottom: 10px;
+    display:inline-block;
+    border:none;
+    border-radius: 5px;
+    background-color: rgb(46, 44, 44);
+    cursor: pointer;
+    width: 142px;
+    color: white;
+}
+/* -----------------------------main------------------------ */
+
+.box>.main
+{
+    flex:90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main .header
+{
+    flex: 10%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.main .board
+{
+    margin-right: 15px;
+    flex: 55%;
+    background-color: rgb(46, 44, 44);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.header div
+{
+    background-color: rgb(10, 9, 9);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    align-self: auto;
+}
+.main .button4
+{
+    margin-bottom: 20px;
+    display:inline-block;
+    border:none;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    width: 80px;
+    color: black;
+}
