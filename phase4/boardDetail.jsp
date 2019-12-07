@@ -8,17 +8,17 @@
 		try {
 			String driverName = "oracle.jdbc.driver.OracleDriver"; 
 	 
-	        String url = "jdbc:oracle:thin:@localhost:1521:root";
+	        String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	 
 	        ResultSet rs = null;
 	        
 	        Class.forName(driverName);
 	 
-	        Connection con = DriverManager.getConnection(url,"BOARD","board");
+	        Connection con = DriverManager.getConnection(url,"ncnc","ncnc");
 	 
 	        Statement stmt = con.createStatement();        
 	 
-	        String sql = "SELECT * FROM BOARD WHERE IDX="+idx;
+	        String sql = "SELECT * FROM CAR_INFO WHERE order_num="+idx;
 	        
 	        rs = stmt.executeQuery(sql);
 	        
@@ -30,63 +30,45 @@
         <div class = "entire">
             <div class = "room_state">
                 <span>
-                    방 정보
+                    차량 세부 정보
                 </span>
             </div>
 
-            <div class = "detail">
-                <div class = "room_title">
-                    &nbsp;방제목: <%out.println(rs.getString("TITLE")); %>
+            <div class = "Vehicle_detail">
+            	<div class = "ORDER_NUM">
+                    &nbsp;매물 번호: <%out.println(rs.getString("ORDER_NUM")); %>
                 </div>
-                <div class = "room_start">
-                    &nbsp;출발지: <%out.println(rs.getString("START_")); %>
+                <div class = "vnum">
+                    &nbsp;차량 번호: <%out.println(rs.getString("VEHICLE_NUM")); %>
                 </div>
-                <div class = "room_dest">
-                    &nbsp;도착지: <%out.println(rs.getString("DEST_")); %>
+                <div class = "vtype">
+                    &nbsp;차종: <%out.println(rs.getString("C_TYPE")); %>
                 </div>
-                <div class = "room_time">
-                    &nbsp;시간: <%out.println(rs.getString("TIME_")); %>
+                <div class = "maker">
+                    &nbsp;제조사: <%out.println(rs.getString("MAKER_NAME")); %>
                 </div>
-                <div class = "room_cloth">
-                    &nbsp;인상착의 및 장소: <%out.println(rs.getString("CLOTH_")); %>
+                <div class = "mname">
+                    &nbsp;모델명: <%out.println(rs.getString("MODEL_NAME") + " " + rs.getString("DETAIL_NAME")); %>
+                </div>
+                <div class = "myear">
+                    &nbsp;연식: <%out.println(rs.getString("MODEL_YEAR")); %>
+                </div>
+                <div class = "ttype">
+                    &nbsp;기어종류: <%out.println(rs.getString("T_TYPE")); %>
+                </div>
+                <div class = "edtype">
+                    &nbsp;배기량: <%out.println(rs.getString("ED_TYPE")); %>
+                </div>
+                <div class = "fuel">
+                    &nbsp;사용 연료: <%out.println(rs.getString("FUEL_TYPE")); %>
+                </div>
+                <div class = "color">
+                    &nbsp;색상: <%out.println(rs.getString("COLOR_NAME")); %>
+                </div>
+                <div class = "price">
+                    &nbsp;가격: <%out.println(rs.getString("PRICE")); %>
                 </div>
             </div>    
-            <div class = "participant_state">
-                <span>참가자</span>
-            </div>
-            <div class = "participant">
-                <div>
-                <%out.println("&nbsp"+rs.getString("WRITER")); %>
-                </div>
-                <div>
-                <br>
-                <%
-                if(rs.getString("PART1")==null)
-                	out.println("&nbsp없음");
-                else
-                	out.println("&nbsp"+rs.getString("PART1"));
-                %>
-                </div>
-                <div>
-                <br>
-                <%
-                if(rs.getString("PART2")==null)
-                	out.println("&nbsp없음");
-                else
-                	out.println("&nbsp"+rs.getString("PART2"));
-                %>
-                </div>
-                <div>
-                <br>
-                <%
-                if(rs.getString("PART3")==null)
-                	out.println("&nbsp없음");
-                else
-                	out.println("&nbsp"+rs.getString("PART3"));
-                %>
-                </div>
-            </div>
-        </div>
         <%
 	        con.close();
 		}catch(Exception e){

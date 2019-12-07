@@ -12,15 +12,21 @@
 	try {
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
-		String url = "jdbc:oracle:thin:@localhost:1600:xe";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 		ResultSet rs = null;
 
 		Class.forName(driverName);
 
-		Connection con = DriverManager.getConnection(url, "nicar", "car");
+		Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
 
 		Statement stmt = con.createStatement();
+		
+		//car_info view update / create
+		String sqlv = "create or replace view car_info as Select distinct v.vehicle_num, b.order_num, v.model_year, c.c_type, m.model_name, d.detail_name, v.price , t.t_type, e.ed_type, clrs.color_name, fus.fuel_type, mk.maker_name, clr.color_id, fu.fuel_id\n"
+				+ "															from ((((((((((VEHICLE v join BLIND_INFO b on v.vehicle_num = b.vnum) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join category c on v.ctnum = c.c_id)join transmission t on v.tnum = t.t_id)join engine_displacement e on v.enum = e.ed_id)join color clr on v.cnum  = clr.color_id) join colors clrs on clr.color_id = clrs.color_id)join fuel fu on v.fnum = fu.fuel_id)join fuels fus on fu.fuel_id = fus.fuel_id)join maker mk on m.maker_no = mk.maker_id \n"
+				+ "															where b.order_date is null";
+		stmt.execute(sqlv);
 %>
 <script type="text/javascript">
          function goCreateboard(){
@@ -146,13 +152,13 @@
 					try {
 						String driverName = "oracle.jdbc.driver.OracleDriver";
 
-						String url = "jdbc:oracle:thin:@localhost:1600:xe";
+						String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 						ResultSet rs = null;
 
 						Class.forName(driverName);
 
-						Connection con = DriverManager.getConnection(url, "nicar", "car");
+						Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
 
 						String search1 = request.getParameter("search_1");
 						String search2 = request.getParameter("search_2");
