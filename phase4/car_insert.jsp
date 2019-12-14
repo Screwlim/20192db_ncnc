@@ -57,7 +57,7 @@
 				
 				if(rs.next()){
 					
-					sql = "insert into vehicle values (" + "'" + vnum + "', to_date(" + model_year + ", yyyy-mm-dd), " + mileage + ", " + price + ", " + fuel + ", " + color + ", " + category + ", " + engine + ", " + trans + ", " + detail + ")";
+					sql = "insert into vehicle values (" + "'" + vnum + "', to_date('" + model_year + "', 'yyyy-mm-dd'), " + mileage + ", " + price + ", " + fuel + ", " + color + ", " + category + ", " + engine + ", " + trans + ", " + detail + ")";
 
 					System.out.println(sql);
 					
@@ -74,6 +74,7 @@
 						
 						if(rs.next()){
 							cnt = rs.getInt("num");
+							cnt++;
 						}
 						
 						sql = "insert into order_info(order_num, seller, vnum) values (" + cnt + ", '" + seller + "', '" + vnum +"')";
