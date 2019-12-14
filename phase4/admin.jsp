@@ -24,9 +24,19 @@
 %>
 <script type="text/javascript">
 	function goCreateboard() {
-		var x_ = (window.screen.width / 2) - 160;
-		var y_ = (window.screen.height / 2) - 215;
-		if (!(window.open("createboard.jsp", "childForm",
+		var x_ = (window.screen.width / 2) - 395;
+		var y_ = (window.screen.height / 2) - 260;
+		if (!(window.open("CarInsert.jsp", "childForm",
+				"width=790, height=520 , left=" + x_ + ", top=" + y_
+						+ ", screenX=" + x_ + ", screenY=" + y_
+						+ ", resizable = no, scrollbars = no, status = no"))) {
+			return false;
+		}
+	}
+	function goView() {
+		var x_ = (window.screen.width / 2) - 360;
+		var y_ = (window.screen.height / 2) - 245;
+		if (!(window.open("OrderStat.jsp", "childForm",
 				"width=720, height=480 , left=" + x_ + ", top=" + y_
 						+ ", screenX=" + x_ + ", screenY=" + y_
 						+ ", resizable = no, scrollbars = no, status = no"))) {
@@ -41,7 +51,7 @@
 		location.href = "Logout.jsp";
 	}
 	function goTaxi() {
-		location.href = "taxi.jsp";
+		location.href = "first.jsp";
 	}
 	function checkValue() {
 		if (!document.reportInfo.report_id.value) {
@@ -87,9 +97,12 @@
 								if (rs.getString("is_admin").equals("T"))
 									is_admin = true;
 
-							if (is_admin)
+							if (is_admin) {
 								out.print(
-										"<button class=\"button3\" onclick=\"goAdmin()\"> <img src=\"realreport.png\" style=\"height: 15px\">관리자 기능 </button>");
+										"<button class=\"button3\" onclick=\"goAdmin()\"> <img src=\"realreport.png\" style=\"height: 15px\">비공개 처리 </button>");
+								out.print("<button class=\"button4\" onclick=\"goView()\">구매 내역 조회 </button>");
+							}
+
 							rs.close();
 							stmt.close();
 							con.close();

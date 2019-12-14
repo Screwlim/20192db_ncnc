@@ -1,0 +1,52 @@
+.main .board
+{
+    margin-right: 30px;
+    flex: 55%;
+}
+
+.main .board
+{
+    background-color: rgb(185, 167, 167);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: flex;
+}
+
+.room_box
+{
+    flex-grow: 1;
+
+    overflow-x: hidden; 
+    overflow-y: scroll;
+}
+
+.room_box>.room
+{
+    border-radius: 5px;
+    margin: 5px;
+    float: left;
+    width: 48%;
+    height: 120px;
+    background-color: #E4E4E4;
+    display: flex;
+    flex-direction: column;
+}
+
+.room_box .room .room_text
+{
+    cursor: pointer;
+}
+
+.room_box .room button
+{
+    width: 70px;
+    margin-right: 10px;
+    float: right;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(44, 41, 41);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
