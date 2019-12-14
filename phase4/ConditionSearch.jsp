@@ -53,7 +53,7 @@
              location.href="Logout.jsp";   
          }
           function goFirst(){
-             location.href="ConditionSearch.jsp";   
+             location.href="first.jsp";   
          }
       </script>
 </head>
@@ -129,27 +129,28 @@
 					</div>
 					<div class="search">
 						<form action="ConditionSearch.jsp" method="post" name="searchInfo">
-							<select id="category" name="category">
+							차종 : <select id="category" name="category">
 								<option value="where c.c_type is not null ">Anything</option>
 								<option value="where c.c_type = 'Light-Weight' ">Light-Weight</option>
 								<option value="where c.c_type = 'MidSize' ">MidSize</option>
 								<option value="where c.c_type = 'FullSize' ">FullSize</option>
 								<option value="where c.c_type = 'SUV' ">SUV</option>
 								<option value="where c.c_type = 'Coupe' ">Coupe</option>
-							</select> <select id="maker" name="maker">
+							</select>
+							제조사 : <select id="maker" name="maker">
 								<option value=" ">Anything</option>
 								<option value="and c.maker_name = 'Hyundai' ">Hyundai</option>
 								<option value="and c.maker_name = 'Kia' ">Kia</option>
 								<option value="and c.maker_name = 'Chevrolet' ">Chevrolet</option>
 								<option value="and c.maker_name = 'Ssangyong' ">SsangYong</option>
-								<option value="and c.maker_name = 'Renault Samsung' ">Renault
-									Samsung</option>
+								<option value="and c.maker_name = 'Renault Samsung' ">Renault Samsung</option>
 								<option value="and c.maker_name = 'Benz' ">Benz</option>
 								<option value="and c.maker_name = 'BMW' ">BMW</option>
 								<option value="and c.maker_name = 'Audi' ">Audi</option>
 								<option value="and c.maker_name = 'Porsche' ">Porsche</option>
 								<option value="and c.maker_name = 'Lamborghini' ">Lamborghini</option>
-							</select> <select id="fuel" name="fuel">
+							</select>
+							연료 : <select id="fuel" name="fuel">
 								<option value=" ">Anything</option>
 								<option value="and c.fuel_id='0' ">Gasoline</option>
 								<option value="and c.fuel_id='1' ">Diesel</option>
@@ -157,21 +158,34 @@
 								<option value="and c.fuel_id='3' ">Electric</option>
 								<option value="and c.fuel_id='4' ">Gasoline & Electric</option>
 								<option value="and c.fuel_id='6' ">Gasoline & LPG</option>
-							</select> <select id="transmission" name="transmission">
+							</select>
+							변속기 종류 : <select id="transmission" name="transmission">
 								<option value=" ">Anything</option>
 								<option value="and c.t_type ='Auto' ">Auto</option>
 								<option value="and c.t_type ='Semi-Auto' ">Semi-Auto</option>
 								<option value="and c.t_type ='Manual' ">Manual</option>
-							</select> <select id="color" name="color">
-								<option value=" ">Anything</option>
-								<option value=" and c.color_id='0' ">Black</option>
-								<option value=" and c.color_id='1' ">White</option>
-								<option value=" and c.color_id='2' ">Gray</option>
-								<option value=" and c.color_id='3' ">Red</option>
-								<option value=" and c.color_id='4' ">Blue</option>
-								<option value=" and c.color_id='5' ">Black & Gray</option>
-								<option value=" and c.color_id='6' ">White & Gray</option>
 							</select>
+							색상 : <select id="color" name="color">
+								<option value=" ">Anything</option>
+								<option value="and c.color_id = '0' ">Black</option>
+								<option value="and c.color_id = '1' ">White</option>
+								<option value="and c.color_id = '2' ">Gray</option>
+								<option value="and c.color_id = '3' ">Red</option>
+								<option value="and c.color_id = '4' ">Blue</option>
+								<option value="and c.color_id = '5' ">Black & Gray</option>
+								<option value="and c.color_id = '6' ">White & Gray</option>
+							</select>
+							배기량 : <select id="ed" name="ed">
+								<option value=" ">Anything</option>
+								<option value=" and c.ed_type = '1500' ">1500</option>
+								<option value=" and c.ed_type = '2000' ">2000</option>
+								<option value=" and c.ed_type = '2500' ">2500</option>
+								<option value=" and c.ed_type = '3000' ">3000</option>
+								<option value=" and c.ed_type = '4000' ">4000</option>
+								<option value=" and c.ed_type = '5000' ">5000</option>
+							</select>
+							가격대 : <input type = "number" name = "pricemin">
+							 ~ <input type = "number" name = "pricemax">
 							<button class="refresh_button" onclick="gotaxi()">검색</button>
 						</form>
 					</div>
@@ -189,14 +203,41 @@
 						Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
 
 						String category = request.getParameter("category");
+						if(category == null){
+							category = "where c.c_type is not null ";
+						}
 						String maker = request.getParameter("maker");
+						if(maker == null){
+							maker = "";
+						}
 						String fuel = request.getParameter("fuel");
-						//String ed = request.getParameter("ed");
+						if(fuel == null){
+							fuel = "";
+						}
+						String transmission = request.getParameter("transmission");
+						if(transmission == null){
+							transmission = "";
+						}
+						String ed = request.getParameter("ed");
+						if(ed == null){
+							ed = "";
+						}
 						String color = request.getParameter("color");
-
+						if(color == null){
+							color = "";
+						}
+						String pricemin = request.getParameter("pricemin");
+						String pricemax = request.getParameter("pricemax");
+						if(pricemin == null || pricemin == ""){
+							pricemin = "0";
+						}
+						if(pricemax == null || pricemax == ""){
+							pricemax = "9999999999";
+						}
+						String price = "and c.price > " + pricemin + " and c.price < " + pricemax;
+						
 						String sql = "Select distinct c.vehicle_num, c.model_year, c.c_type, c.model_name, c.detail_name, c.price, c.order_num, c.maker_name\n"
-								+ "from car_info c\n" + category + maker + fuel + color + " order by c.price";
-
+								+ "from car_info c\n" + category + maker + fuel + transmission + color + ed + price + " order by c.price";
 						out.println(sql);
 						PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 								ResultSet.CONCUR_UPDATABLE);
