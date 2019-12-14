@@ -1,47 +1,81 @@
-.entire
+.container
 {
-    background-color: whitesmoke;
-    width: 300px;
+    width: 800px;
+    height: 580px;
+    background-color: #f2f2f2;
     display: flex;
     flex-direction: column;
 }
 
+.container .row
+{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+}
 
-.room_state
+.container .col-25
+{
+    margin-left: 20px;
+    flex: 25%;
+}
+
+.container .col-75
+{
+    flex: 75%;
+}
+
+.container .row input
+{
+    border: none;
+    border-radius: 5px;
+}
+
+.container #fname
+{
+    width: 80%;
+}
+
+.container #start
+{
+    width: 340px;
+}
+
+.container #dest
+{
+    width: 340px;
+}
+
+.container #time
+{
+    width: 80%;
+}
+
+.container .row textarea
 {
     border-radius: 5px;
-    background-color: #E4E4E4;
-    display: flex;
+    width: 80%;
+}
+
+input[type=submit] 
+{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 30px;
     margin-bottom: 10px;
 }
 
-.room_state span
-{   
-    margin: 5px;
-    font-size: 10px;
+
+input[type=submit]:hover 
+{
+    background-color: #45a049;
 }
 
-.detail
+input[type=text], select, textarea
 {
-    display: flex;
-    flex-direction: column;
-}
-
-.detail div
-{
-    margin-bottom: 10px;
-}
-
-.participant_state
-{
-    border-radius: 5px;
-    background-color: #E4E4E4;
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.participant_state span
-{
-    margin: 5px;
-    font-size: 10px;
+    border: 1px solid #ccc;
 }

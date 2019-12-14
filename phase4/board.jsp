@@ -12,13 +12,13 @@
 	try {
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@localhost:1600:xe";
 
 		ResultSet rs = null;
 
 		Class.forName(driverName);
 
-		Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
+		Connection con = DriverManager.getConnection(url, "nicar", "car");
 
 		Statement stmt = con.createStatement();
 		
@@ -30,9 +30,9 @@
 %>
 <script type="text/javascript">
          function goCreateboard(){
-        	var x_ = (window.screen.width/2) - 160;
-        	var y_ = (window.screen.height/2) - 215;
-            if(!(window.open("CarInsert.jsp","childForm","width=720, height=480 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
+        	var x_ = (window.screen.width/2) - 395;
+        	var y_ = (window.screen.height/2) - 260;
+            if(!(window.open("CarInsert.jsp","childForm","width=790, height=520 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
                return false;
             }
          }
@@ -43,9 +43,9 @@
              location.href="CarPurchase.jsp?idx="+idx;
          }
          function goDetail(idx){
-        	 var x_ = (window.screen.width/2) - 165;
-        	 var y_ = (window.screen.height/2) - 225;
-             if(!(window.open("boardDetail.jsp?idx="+idx,"childForm","width=325, height=450 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
+        	 var x_ = (window.screen.width/2) - 410;
+        	 var y_ = (window.screen.height/2) - 300;
+             if(!(window.open("boardDetail.jsp?idx="+idx,"childForm","width=820, height=600 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
                 return false;
              }
          }
@@ -103,9 +103,11 @@
 								if (rs.getString("is_admin").equals("T"))
 									is_admin = true;
 
-							if (is_admin)
+							if (is_admin){
 								out.print(
 										"<button class=\"button\" onclick=\"goAdmin()\"> <img src=\"realreport.png\" style=\"height: 15px\">관리자 기능 </button>");
+							}
+								
 							rs.close();
 							stmt.close();
 							con.close();
@@ -129,22 +131,69 @@
 					</div>
 					<div class="search">
 						<form action="board.jsp" method="post" name="searchInfo">
-							<select id="search_1" name="search_1">
-								<option value=null></option>
-								<option value="출발지">출발지</option>
-								<option value="도착지">도착지</option>
-							</select> 
-							<select id="search_2" name="search_2">
-								<option value=null></option>
-								<option value="남구">남구</option>
-								<option value="달서구">달서구</option>
-								<option value="달성군">달성군</option>
-								<option value="동구">동구</option>
-								<option value="북구">북구</option>
-								<option value="서구">서구</option>
-								<option value="수성구">수성구</option>
-								<option value="중구">중구</option>
+							차종 : <select id="category" name="category">
+								<option value="where c.c_type is not null ">Anything</option>
+								<option value="where c.c_type = 'Light-Weight' ">Light-Weight</option>
+								<option value="where c.c_type = 'MidSize' ">MidSize</option>
+								<option value="where c.c_type = 'FullSize' ">FullSize</option>
+								<option value="where c.c_type = 'SUV' ">SUV</option>
+								<option value="where c.c_type = 'Coupe' ">Coupe</option>
 							</select>
+							제조사 : <select id="maker" name="maker">
+								<option value=" ">Anything</option>
+								<option value="and c.maker_name = 'Hyundai' ">Hyundai</option>
+								<option value="and c.maker_name = 'Kia' ">Kia</option>
+								<option value="and c.maker_name = 'Chevrolet' ">Chevrolet</option>
+								<option value="and c.maker_name = 'Ssangyong' ">SsangYong</option>
+								<option value="and c.maker_name = 'Renault Samsung' ">Renault Samsung</option>
+								<option value="and c.maker_name = 'Benz' ">Benz</option>
+								<option value="and c.maker_name = 'BMW' ">BMW</option>
+								<option value="and c.maker_name = 'Audi' ">Audi</option>
+								<option value="and c.maker_name = 'Porsche' ">Porsche</option>
+								<option value="and c.maker_name = 'Lamborghini' ">Lamborghini</option>
+							</select>
+							연료 : <select id="fuel" name="fuel">
+								<option value=" ">Anything</option>
+								<option value="and c.fuel_id='0' ">Gasoline</option>
+								<option value="and c.fuel_id='1' ">Diesel</option>
+								<option value="and c.fuel_id='2' ">LPG</option>
+								<option value="and c.fuel_id='3' ">Electric</option>
+								<option value="and c.fuel_id='4' ">Gasoline & Electric</option>
+								<option value="and c.fuel_id='6' ">Gasoline & LPG</option>
+							</select>
+							변속기 종류 : <select id="transmission" name="transmission">
+								<option value=" ">Anything</option>
+								<option value="and c.t_type ='Auto' ">Auto</option>
+								<option value="and c.t_type ='Semi-Auto' ">Semi-Auto</option>
+								<option value="and c.t_type ='Manual' ">Manual</option>
+							</select>
+							색상 : <select id="color" name="color">
+								<option value=" ">Anything</option>
+								<option value="and c.color_id = '0' ">Black</option>
+								<option value="and c.color_id = '1' ">White</option>
+								<option value="and c.color_id = '2' ">Gray</option>
+								<option value="and c.color_id = '3' ">Red</option>
+								<option value="and c.color_id = '4' ">Blue</option>
+								<option value="and c.color_id = '5' ">Black & Gray</option>
+								<option value="and c.color_id = '6' ">White & Gray</option>
+							</select>
+							배기량 : <select id="ed" name="ed">
+								<option value=" ">Anything</option>
+								<option value=" and c.ed_type = '1500' ">1500</option>
+								<option value=" and c.ed_type = '2000' ">2000</option>
+								<option value=" and c.ed_type = '2500' ">2500</option>
+								<option value=" and c.ed_type = '3000' ">3000</option>
+								<option value=" and c.ed_type = '4000' ">4000</option>
+								<option value=" and c.ed_type = '5000' ">5000</option>
+							</select>
+							가격대 : <input type = "number" name = "pricemin">
+							 ~ <input type = "number" name = "pricemax">
+							<button class="refresh_button" onclick="gotaxi()">검색</button>
+						</form>
+					</div>
+					<div class="search">
+						<form action="board.jsp" method="post" name="searchInfo">
+							모델 : <input type = "text" name = "model">
 							<button class="refresh_button" onclick="gotaxi()">검색</button>
 						</form>
 					</div>
@@ -153,42 +202,67 @@
 					try {
 						String driverName = "oracle.jdbc.driver.OracleDriver";
 
-						String url = "jdbc:oracle:thin:@localhost:1521:xe";
+						String url = "jdbc:oracle:thin:@localhost:1600:xe";
 
 						ResultSet rs = null;
 
 						Class.forName(driverName);
 
-						Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
+						Connection con = DriverManager.getConnection(url, "nicar", "car");
 
-						String search1 = request.getParameter("search_1");
-						String search2 = request.getParameter("search_2");
-
-						String sql = null;
-
-						if (search1 == null || search2 == null)
-							sql = "with vehicle_to_maker as (select * from ((((vehicle V JOIN blind_info O On V.Vehicle_num = O.Vnum and buyer is null) JOIN Detailed_model D ON V.Dnum=Detail_id) JOIN MODEL ON MODEL.Model_id = D.Mno) JOIN MAKER M ON M.Maker_id = MODEL.Maker_no)) SELECT order_num, maker_name, model_name, detail_name, price FROM vehicle_to_maker ORDER BY Order_num";
-						else if (search1.equals("null") || search2.equals("null"))
-							sql = "with vehicle_to_maker as (select * from ((((vehicle V JOIN blind_info O On V.Vehicle_num = O.Vnum and buyer is null) JOIN Detailed_model D ON V.Dnum=Detail_id) JOIN MODEL ON MODEL.Model_id = D.Mno) JOIN MAKER M ON M.Maker_id = MODEL.Maker_no)) SELECT order_num, maker_name, model_name, detail_name, price FROM vehicle_to_maker ORDER BY Order_num";
-						else if (search1.equals("출발지"))
-							sql = "";
-						else if (search1.equals("도착지"))
-							sql = "";
-
+						String category = request.getParameter("category");
+						if(category == null){
+							category = "where c.c_type is not null ";
+						}
+						String maker = request.getParameter("maker");
+						if(maker == null){
+							maker = "";
+						}
+						String fuel = request.getParameter("fuel");
+						if(fuel == null){
+							fuel = "";
+						}
+						String transmission = request.getParameter("transmission");
+						if(transmission == null){
+							transmission = "";
+						}
+						String ed = request.getParameter("ed");
+						if(ed == null){
+							ed = "";
+						}
+						String color = request.getParameter("color");
+						if(color == null){
+							color = "";
+						}
+						String pricemin = request.getParameter("pricemin");
+						String pricemax = request.getParameter("pricemax");
+						if(pricemin == null || pricemin == ""){
+							pricemin = "0";
+						}
+						if(pricemax == null || pricemax == ""){
+							pricemax = "9999999999";
+						}
+						String price = "and c.price > " + pricemin + " and c.price < " + pricemax;
+						
+						String sql = "Select distinct c.vehicle_num, c.model_year, c.c_type, c.model_name, c.detail_name, c.price, c.order_num, c.maker_name\n"
+								+ "from car_info c\n" + category + maker + fuel + transmission + color + ed + price + " order by c.price";
+						out.println(sql);
 						PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 								ResultSet.CONCUR_UPDATABLE);
 
 						rs = pstmt.executeQuery(sql);
 
 						rs.last();
-
+						
 						int row = rs.getRow();
-
 						rs.first();
 				%>
 				<div class="board">
 					<div class="room_box">
 						<%
+							if(row == 0){
+								out.println("해당 조건의 구매 가능한 매물이 없습니다.");
+							}
 							for (int i = 1; i < row; i++) {
 									rs.next();
 									String idx = rs.getString("order_num");
@@ -220,7 +294,6 @@
 						<%
 							}
 						%>
-
 					</div>
 				</div>
 				<%
@@ -228,7 +301,7 @@
 						out.println("Oracle Database Connection Something Problem. <hr>");
 
 						out.println(e.getMessage());
-
+						
 						e.printStackTrace();
 					}
 				%>
