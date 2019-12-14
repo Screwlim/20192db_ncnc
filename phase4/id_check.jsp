@@ -17,13 +17,13 @@ try {
  
      String driverName = "oracle.jdbc.driver.OracleDriver"; 
  
-     String url = "jdbc:oracle:thin:@localhost:1521:root";
+     String url = "jdbc:oracle:thin:@localhost:1521:xe";
      
      Class.forName(driverName);
      
      //out.println(id); //아이디 들어가는건 확인함.
  
-     Connection con = DriverManager.getConnection(url,"MEMBER_","member_"); //url + id + pw
+     Connection con = DriverManager.getConnection(url,"ncnc","ncnc"); //url + id + pw
  
      Statement stmt = con.createStatement();            // SQL 쿼리를 날리기위한 Statement 객체 생성
      
@@ -31,7 +31,7 @@ try {
      
      out.println("아이디는 "+id+"입니다");
      
-     String sql = "SELECT ID FROM MEMBER_LIST WHERE ID="+"'"+id+"'";
+     String sql = "SELECT ID FROM ACCOUNT WHERE ID="+"'"+id+"'";
      
      rs = stmt.executeQuery(sql);
  
