@@ -10,7 +10,7 @@
     
     <script type="text/javascript">
     function goTaxi(){
-		location.href="board.jsp";
+		location.href="ConditionSearch.jsp";
 	}
     // 취소 버튼 클릭시 로그인 화면으로 이동
     function goLogin(){
@@ -60,7 +60,12 @@
                 	out.print("<button class = \"button\" onclick=\"goLogout()\"><span>로그아웃</span></button>");
                 %>
                 
-                <button class = "button" onclick="goJoin()"><span>회원가입</span></button>
+                <%
+                if(id == null)
+                	out.print("<button class = \"button\" onclick=\"goJoin()\"><span>회원가입</span></button>");
+                else
+                	out.print("<button class = \"button\" onclick=\"goJoin()\"><span>회원정보</span></button>");
+                %>
             </div>
             <div class = "down">
         

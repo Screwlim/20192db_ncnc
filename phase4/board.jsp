@@ -52,8 +52,8 @@
           function goLogout(){
              location.href="Logout.jsp";   
          }
-          function goTaxi(){
-             location.href="taxi.jsp";   
+          function goFirst(){
+             location.href="first.jsp";   
          }
       </script>
 </head>
@@ -65,7 +65,7 @@
 		<div class="box">
 			<div class="state">
 				<img id="gotaxi" src="5.png" style="height: 100px"
-					onclick="goTaxi()">
+					onclick="goFirst()">
 				<div id="user">
 					<div id="mystate">
 						<span> <img src="person.jpg"> <b>내 정보</b>
@@ -82,7 +82,7 @@
 									out.print("<b>&nbsp최근 구매내역</b><br>");
 
 									int i = 1;
-
+									// 최근 구매이력 7개 출력
 									while (rs.next()) {
 										out.print(i++ + ". " + rs.getString("Vnum") + "<br>");
 										if (i > 7)
@@ -133,7 +133,8 @@
 								<option value=null></option>
 								<option value="출발지">출발지</option>
 								<option value="도착지">도착지</option>
-							</select> <select id="search_2" name="search_2">
+							</select> 
+							<select id="search_2" name="search_2">
 								<option value=null></option>
 								<option value="남구">남구</option>
 								<option value="달서구">달서구</option>
@@ -164,9 +165,6 @@
 						String search2 = request.getParameter("search_2");
 
 						String sql = null;
-
-						//out.print(search1);
-						//out.print(search2);
 
 						if (search1 == null || search2 == null)
 							sql = "with vehicle_to_maker as (select * from ((((vehicle V JOIN blind_info O On V.Vehicle_num = O.Vnum and buyer is null) JOIN Detailed_model D ON V.Dnum=Detail_id) JOIN MODEL ON MODEL.Model_id = D.Mno) JOIN MAKER M ON M.Maker_id = MODEL.Maker_no)) SELECT order_num, maker_name, model_name, detail_name, price FROM vehicle_to_maker ORDER BY Order_num";
