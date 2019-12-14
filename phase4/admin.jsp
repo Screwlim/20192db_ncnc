@@ -37,7 +37,7 @@
 		var x_ = (window.screen.width / 2) - 360;
 		var y_ = (window.screen.height / 2) - 245;
 		if (!(window.open("OrderStat.jsp", "childForm",
-				"width=720, height=480 , left=" + x_ + ", top=" + y_
+				"width=820, height=600 , left=" + x_ + ", top=" + y_
 						+ ", screenX=" + x_ + ", screenY=" + y_
 						+ ", resizable = no, scrollbars = no, status = no"))) {
 			return false;

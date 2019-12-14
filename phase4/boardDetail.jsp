@@ -6,6 +6,7 @@
 <link rel=stylesheet href="boardDetail.css">
 <%
 	String idx = request.getParameter("idx");
+	String rd_only = request.getParameter("rd_only");
 	try {
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
@@ -19,17 +20,10 @@
 
 		Statement stmt = con.createStatement();
 
-		String sql = "SELECT * FROM CAR_INFO WHERE order_num=" + idx;
+		String sql = "SELECT order_num, seller, vnum, price, mileage, extract(year from model_year) as year FROM vehicle join order_info on vehicle_num = vnum WHERE order_num = " + idx;
 
-		rs = stmt.executeQuery(sql);
-
-		rs.next();
+		System.out.println("1 :" + sql);
 		
-		String vehicle_num = rs.getString("vehicle_num");
-		
-		
-		sql = "SELECT order_num, seller, vnum, price, mileage, extract(year from model_year) as year FROM vehicle join order_info on vehicle_num = vnum WHERE vehicle_num= '" + vehicle_num + "'";
-
 		rs = stmt.executeQuery(sql);
 
 		String order_num = "";
@@ -216,14 +210,18 @@
 					</select>
 				</div>
 			</div>
-			<div class="row" style="justify-content: flex-end;">
-				<input type="submit" value="수정하기">
-			</div>
+			<%
+				if( rd_only == null || !rd_only.equals("1")){
+					out.print("<div class=\"row\" style=\"justify-content: flex-end;\">");
+					out.print("<input type=\"submit\" value=\"수정하기\">");
+					out.print("</div>");
+				}
+			%>
 		</form>
 	</div>
 </body>
 <%
-sql = "SELECT * FROM vehicle join order_info on vehicle_num = vnum WHERE vehicle_num= '" + vehicle_num + "'";
+sql = "SELECT * FROM vehicle join order_info on vehicle_num = vnum WHERE order_num = " + idx;
 
 rs = stmt.executeQuery(sql);
 

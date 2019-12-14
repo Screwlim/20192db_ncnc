@@ -49,6 +49,13 @@
                 return false;
              }
          }
+         function orderDetail(idx){
+        	 var x_ = (window.screen.width/2) - 410;
+        	 var y_ = (window.screen.height/2) - 300;
+             if(!(window.open("boardDetail.jsp?idx="+idx+"&rd_only=1","childForm","width=820, height=600 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
+                return false;
+             }
+         }
           function goLogout(){
              location.href="Logout.jsp";   
          }
@@ -74,19 +81,81 @@
 					<div id="mystatebody">
 						<div style="margin-left: 10px">
 							<%
-								String sql = "select Vnum from order_info where buyer = \'" + session.getAttribute("sessionID")
+								String sql = "select order_num, Vnum from order_info where buyer = \'" + session.getAttribute("sessionID")
 											+ "\' order by order_date desc";
 
 									rs = stmt.executeQuery(sql);
 
-									out.print("<b>&nbsp최근 구매내역</b><br>");
-
 									int i = 1;
 									// 최근 구매이력 7개 출력
-									while (rs.next()) {
-										out.print(i++ + ". " + rs.getString("Vnum") + "<br>");
-										if (i > 7)
-											break;
+									if(rs.next()){
+										out.print("<b>&nbsp최근 구매내역</b><br>");
+										out.print("<a href=\"#\" onclick=\"orderDetail(" + rs.getString("order_num") + ")\">" + i++ + ". " + rs.getString("Vnum") + "</a></br>");
+										while(rs.next()){
+											out.print("<a href=\"#\" onclick=\"orderDetail(" + rs.getString("order_num") + ")\">" + i++ + ". " + rs.getString("Vnum") + "</a></br>");
+											if (i >= 7)
+												break;
+										}
+									}
+									else{
+										out.print("<b>&nbsp추천 상품</b><br>");
+										//성별, 나이대, 최근 많이 팔린 상품으로...ㅇ, 상위 3개 모델.
+										sql = "select gender, extract(year from birth_date) as year from account where id = '" + session.getAttribute("sessionID") + "'";
+										System.out.println(sql);
+										rs = stmt.executeQuery(sql);
+										if(rs.next()){
+											String year = rs.getString("year");
+											String gender = rs.getString("gender");
+											if( !gender.equals("") && !year.equals("")){
+												//성별과 나이대에서 가장 많이 구매 색상과 모델 차량 출력
+												/*
+												if(gender.equals("M")){
+													out.print("<b>&nbsp또래 남성고객이 가장 선호하는 색상과 모델</b><br>");
+												}
+												else if(gender.equals("F")){
+													out.print("<b>&nbsp또래 여성고객이 가장 선호하는 색상과 모델</b><br>");
+												}
+												*/
+												int a = Integer.parseInt(year);
+												sql = "with model_to_order as " 
+												+ "(select order_num, model_id from (((order_info join account on buyer = id and gender = '" + gender + "' and birth_date between to_date('" + Integer.toString(a-5) + "-01-01', 'yyyy-mm-dd') and to_date('" + Integer.toString(a+5) + "-01-01', 'yyyy-mm-dd')) join vehicle on vnum = vehicle_num) join detailed_model on dnum=detail_id) join model on mno = model_id), "
+												+ "modelList as (select model_id, count(order_num) as m_count from model_to_order group by model_id), "
+												+ "maxModel as (select model_id from modelList where m_count = (select max(m_count) from modelList)), "
+												+ "colorList as (select cnum, count(order_num) as c_count from (order_info join vehicle on vehicle_num = vnum) join account on id = buyer "
+												+ "where gender = '" + gender + "' and birth_date between to_date('" + Integer.toString(a-5) + "-01-01', 'yyyy-mm-dd') and to_date('" + Integer.toString(a+5) + "-01-01', 'yyyy-mm-dd') group by cnum), "
+												+ "maxColor as (select cnum from colorList where c_count = (select max(c_count) from colorList)) "
+												+ "select vnum, order_num from (((order_info join account on buyer = id ) join vehicle on vnum = vehicle_num) join detailed_model on dnum=detail_id) join model on mno = model_id where cnum in (select max(c_count) from colorList) and mno in (select * from maxModel)";
+												
+												System.out.println(sql);
+												
+												rs = stmt.executeQuery(sql);
+												i = 1;
+												while(rs.next()){
+													out.print("<a href=\"#\" onclick=\"orderDetail(" + rs.getString("order_num") + ")\">" + i++ + ". " + rs.getString("Vnum") + "</a></br>");
+													if (i > 3)
+														break;
+												}
+												
+												out.print("<b>&nbsp최다 판매 모델</b><br>");
+												//가장 잘 팔리는 세부모델
+												sql = "with detailList as " 
+												+ "(select dnum, count(order_num) as d_count from (order_info join account on id = buyer) join vehicle on vnum = vehicle_num group by dnum), "
+												+ "maxdetail as (select dnum from detailList where d_count = (select max(d_count) from detailList))"
+												+ "select order_num, vnum from (blind_info join vehicle on vnum = vehicle_num) where dnum in (select * from maxdetail)";
+												
+												System.out.println(sql);
+												
+												rs = stmt.executeQuery(sql);
+												i = 1;
+												while(rs.next()){
+													out.print("<a href=\"#\" onclick=\"orderDetail(" + rs.getString("order_num") + ")\">" + i++ + ". " + rs.getString("Vnum") + "</a></br>");
+													if (i > 3)
+														break;
+												}
+												
+											}
+										}
+										
 									}
 							%>
 						</div>

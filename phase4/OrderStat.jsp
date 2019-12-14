@@ -5,10 +5,10 @@
 <head>
 <link rel="stylesheet" href="OrderStat.css">
 <script type="text/javascript">
-function goDetail(idx){
+function orderDetail(idx){
 	 var x_ = (window.screen.width/2) - 410;
 	 var y_ = (window.screen.height/2) - 300;
-    if(!(window.open("boardDetail.jsp?idx="+idx,"childForm","width=820, height=600 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
+    if(!(window.open("boardDetail.jsp?idx="+idx+"&rd_only=1","childForm","width=820, height=600 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
        return false;
     }
 }
@@ -92,7 +92,7 @@ function goDetail(idx){
 						String idx = rs.getString("order_num");
 			%>
 			<div class="room">
-				<div class="room_text" onclick="goDetail(<%=idx%>)">
+				<div class="room_text" onclick="orderDetail(<%=idx%>)">
 					<div class="room_tilte">
 						<%
 							out.print("<br>&nbsp&nbsp 매물 번호 : " + idx);
