@@ -23,18 +23,18 @@
 		try {
 			String driverName = "oracle.jdbc.driver.OracleDriver"; 
         	 
-			String url = "jdbc:oracle:thin:@localhost:1600:xe";
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
              
 			ResultSet rs = null;
              
 			Class.forName(driverName);
              
-			con = DriverManager.getConnection(url,"nicar","car");
+			con = DriverManager.getConnection(url,"ncnc","ncnc");
          
 			stmt = con.createStatement(); 
              
 			String sql= "SELECT password FROM Account WHERE id ="+"'"+id+"'";
-             
+            
 			rs = stmt.executeQuery(sql);
              
 			if(rs.next()){
@@ -65,16 +65,21 @@
         { 
             session.setAttribute("sessionID", id);
             msg = "first.jsp";
+           	response.sendRedirect(msg);
+
         }
         else if(res == 0) // 비밀번호가 틀릴경우
         {
-            msg = "LoginPage.jsp?msg=0";
+        	out.println("<script>alert('잘못된 비밀번호입니다.');history.back();</script>");
+        	out.flush();
+        	msg = "LoginPage.jsp?msg=0";
         }
         else    // 아이디가 틀릴경우
         {
+        	out.println("<script>alert('존재하지 않는 아이디입니다.');history.back();</script>");
+        	out.flush();
             msg = "LoginPage.jsp?msg=0";
         }
-        response.sendRedirect(msg);
     %>
 </body>
 </html>
