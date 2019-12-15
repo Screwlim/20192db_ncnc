@@ -6,18 +6,18 @@
 <meta charset="EUC-KR">
 <link rel=stylesheet href="CarInsert.css">
 </head>
-	<script type="text/javascript">
+<script type="text/javascript">
 		function formCheck() {
-			var vnum = document.forms[0].vnum.value;
-			var mileage = document.forms[0].mileage.value;
-			var price = document.forms[0].price.value;
-			var model_year = document.forms[0].model_year.value;
-			var fuel = document.forms[0].fuel.value;
-			var category = document.forms[0].category.value;
-			var color = document.forms[0].color.value;
-			var engine = documnet.forms[0].engine.value;
-			var trans = document.forms[0].trans.value;
-			var detail = document.forms[0].detail.value;
+			var vnum = document.insertForm.vnum.value;
+			var mileage = document.insertForm.mileage.value;
+			var price = document.insertForm.price.value;
+			var model_year = document.insertForm.model_year.value;
+			var fuel = document.insertForm.fuel.value;
+			var category = document.insertForm.category.value;
+			var color = document.insertForm.color.value;
+			var engine = documnet.insertForm.engine.value;
+			var trans = document.insertForm.trans.value;
+			var detail = document.insertForm.detail.value;
 
 			if (vnum == null || vnum == "") {
 				alert('차량번호를 입력하세요');
@@ -85,7 +85,7 @@
 				return false;
 			}
 		}
-	</script>
+</script>
 <%
 request.setCharacterEncoding("euc-kr");
 
@@ -105,7 +105,15 @@ String sql;
 %>
 <body>
 	<div class="container">
-		<form action="car_insert.jsp" method="post" onsubmit="return formCheck();">
+		<form name="insertForm" action="car_insert.jsp" method="post" onsubmit="formCheck();return false">
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">판매자</label>
+				</div>
+				<div class="col-75">
+					<input type="text" id="seller" name="seller" placeholder="판매자">
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-25">
 					<label for="fname">차량 변호</label>

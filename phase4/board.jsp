@@ -160,7 +160,6 @@
 							%>
 						</div>
 					</div>
-					<button class="button" onclick="goCreateboard()">새 매물 등록</button>
 					<%
 						sql = "select is_admin from account where id = \'" + session.getAttribute("sessionID") + "\'";
 
@@ -173,6 +172,7 @@
 									is_admin = true;
 
 							if (is_admin){
+								out.print("<button class=\"button\" onclick=\"goCreateboard()\">새 매물 등록</button>");
 								out.print(
 										"<button class=\"button\" onclick=\"goAdmin()\"> <img src=\"realreport.png\" style=\"height: 15px\">관리자 기능 </button>");
 							}
