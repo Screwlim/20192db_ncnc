@@ -24,8 +24,8 @@
 
 		//car_info view update / create
 		String sqlv = "create or replace view car_info as select order_num, maker_name, maker_id, model_id, model_name, d.detail_name,v.* " +
-				"from (((vehicle v join order_info o on o.vnum = v.vehicle_num) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join maker on maker_no = maker_id " +
-				"where o.buyer is null";
+				"from (((vehicle v join blind_info b on b.vnum = v.vehicle_num) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join maker on maker_no = maker_id " +
+				"where b.buyer is null";
 		stmt.execute(sqlv);
 %>
 <script type="text/javascript">
