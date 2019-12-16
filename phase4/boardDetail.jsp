@@ -6,7 +6,14 @@
 <link rel=stylesheet href="boardDetail.css">
 <%
 	String idx = request.getParameter("idx");
-	String rd_only = request.getParameter("rd_only");
+	String rd = request.getParameter("rd_only");
+	
+	boolean rd_only = true;
+	
+	if( rd == null || !rd.equals("1")){
+		rd_only = false; //수정가능
+	}
+	
 	try {
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
@@ -75,7 +82,7 @@
 					<label for="name">가격</label>
 				</div>
 				<div class="col-75">
-					<input type="number" value="<%=price%>" id="price" name="price" placeholder="가격">
+					<input type="number" value="<%=price%>" id="price" name="price" placeholder="가격" <%if(rd_only){out.print("readonly");} %>>
 				</div>
 			</div>
 			<div class="row">
@@ -84,7 +91,7 @@
 				</div>
 				<div class="col-75">
 					<input type="number" id="mileage" value="<%=mileage%>" name="mileage" placeholder="주행거리"
-						min=1000 max=1000000>
+						min=1000 max=1000000 <%if(rd_only){out.print("readonly");} %>>
 				</div>
 			</div>
 			<div class="row">
@@ -93,7 +100,7 @@
 				</div>
 				<div class="col-75">
 					<input type="date" id="model_year" name="model_year" value="<%=year+"-01-01"%>"
-						min="1977-01-01" max="2019-12-31">
+						min="1977-01-01" max="2019-12-31" <%if(rd_only){out.print("readonly");} %>>
 				</div>
 			</div>
 			<div class="row">
@@ -101,7 +108,7 @@
 					<label for="name">연료</label>
 				</div>
 				<div class="col-75">
-					<select id="fuel" name="fuel">
+					<select id="fuel" name="fuel" <%if(rd_only){out.print("disabled");} %>>
 						<%
 							sql = "select * from fuels";
 
@@ -120,7 +127,7 @@
 					<label for="time">차종</label>
 				</div>
 				<div class="col-75">
-					<select id="category" name="category">
+					<select id="category" name="category" <%if(rd_only){out.print("disabled");} %>>
 						<%
 							sql = "select * from category";
 
@@ -139,7 +146,7 @@
 					<label for="name">색상</label>
 				</div>
 				<div class="col-75">
-					<select id="color" name="color">
+					<select id="color" name="color" <%if(rd_only){out.print("disabled");} %>>
 						<%
 							sql = "select * from colors";
 
@@ -158,7 +165,7 @@
 					<label for="name">배기량</label>
 				</div>
 				<div class="col-75">
-					<select id="engine" name="engine">
+					<select id="engine" name="engine" <%if(rd_only){out.print("disabled");} %>>
 						<%
 							sql = "select * from engine_displacement";
 
@@ -177,7 +184,7 @@
 					<label for="name">트랜스미션</label>
 				</div>
 				<div class="col-75">
-					<select id="trans" name="trans">
+					<select id="trans" name="trans" <%if(rd_only){out.print("disabled");} %>>
 						<%
 							sql = "select * from transmission";
 
@@ -196,7 +203,7 @@
 					<label for="name">세부모델</label>
 				</div>
 				<div class="col-75">
-					<select id="detail" name="detail">
+					<select id="detail" name="detail" <%if(rd_only){out.print("disabled");} %>>
 						<%
 							sql = "select maker_id, maker_name, model_id, model_name, detail_id, detail_name from (maker join model on maker_no = maker_id) join detailed_model D on D.mno = model_id ";
 
@@ -211,7 +218,7 @@
 				</div>
 			</div>
 			<%
-				if( rd_only == null || !rd_only.equals("1")){
+				if(!rd_only){
 					out.print("<div class=\"row\" style=\"justify-content: flex-end;\">");
 					out.print("<input type=\"submit\" value=\"수정하기\">");
 					out.print("</div>");

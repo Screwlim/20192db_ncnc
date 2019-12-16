@@ -29,44 +29,10 @@ function orderDetail(idx){
 
 		Connection con = DriverManager.getConnection(url, "nicar", "car");
 
-		String category = request.getParameter("category");
-		if (category == null) {
-			category = "where c.c_type is not null ";
-		}
-		String maker = request.getParameter("maker");
-		if (maker == null) {
-			maker = "";
-		}
-		String fuel = request.getParameter("fuel");
-		if (fuel == null) {
-			fuel = "";
-		}
-		String transmission = request.getParameter("transmission");
-		if (transmission == null) {
-			transmission = "";
-		}
-		String ed = request.getParameter("ed");
-		if (ed == null) {
-			ed = "";
-		}
-		String color = request.getParameter("color");
-		if (color == null) {
-			color = "";
-		}
-		String pricemin = request.getParameter("pricemin");
-		String pricemax = request.getParameter("pricemax");
-		if (pricemin == null || pricemin == "") {
-			pricemin = "0";
-		}
-		if (pricemax == null || pricemax == "") {
-			pricemax = "9999999999";
-		}
-		String price = "and c.price > " + pricemin + " and c.price < " + pricemax;
+		String sql = "select order_num, maker_name, maker_id, model_id, model_name, v.*, detail_name from (((vehicle v join order_info o on o.vnum = v.vehicle_num) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join maker on maker_no = maker_id where o.buyer is null";
 
-		String sql = "Select distinct c.vehicle_num, c.model_year, c.c_type, c.model_name, c.detail_name, c.price, c.order_num, c.maker_name\n"
-				+ "from car_info c\n" + category + maker + fuel + transmission + color + ed + price
-				+ " order by c.price";
-		out.println(sql);
+		//out.println(sql);
+
 		PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 				ResultSet.CONCUR_UPDATABLE);
 
@@ -78,16 +44,11 @@ function orderDetail(idx){
 		rs.first();
 %>
 </head>
-
 <body>
-
 	<div class="board">
 		<div class="room_box">
 			<%
-				if (row == 0) {
-						out.println("해당 조건의 구매 가능한 매물이 없습니다.");
-					}
-					for (int i = 1; i < row; i++) {
+				for (int i = 1; i < row; i++) {
 						rs.next();
 						String idx = rs.getString("order_num");
 			%>
@@ -110,10 +71,10 @@ function orderDetail(idx){
 									out.print("&nbsp&nbsp&nbsp 가격 : " + dc.format(Double.valueOf(rs.getString("price"))) + "원");
 						%>
 					</div>
+					<div class="join"></div>
 				</div>
 			</div>
-			<%
-				}
+			<%	}
 				} catch (Exception e) {
 					out.println("Oracle Database Connection Something Problem. <hr>");
 
