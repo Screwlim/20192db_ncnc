@@ -8,7 +8,7 @@
 function orderDetail(idx){
 	 var x_ = (window.screen.width/2) - 410;
 	 var y_ = (window.screen.height/2) - 300;
-    if(!(window.open("boardDetail.jsp?idx="+idx+"&rd_only=1","childForm","width=820, height=600 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
+    if(!(window.open("orderDetail.jsp?idx="+idx+"&rd_only=1","childForm","width=820, height=600 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
        return false;
     }
 }
@@ -29,7 +29,7 @@ function orderDetail(idx){
 
 		Connection con = DriverManager.getConnection(url, "nicar", "car");
 
-		String sql = "select order_num, maker_name, maker_id, model_id, model_name, v.*, detail_name from (((vehicle v join order_info o on o.vnum = v.vehicle_num) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join maker on maker_no = maker_id where o.buyer is null";
+		String sql = "select order_num, maker_name, maker_id, model_id, model_name, v.*, detail_name from (((vehicle v join order_info o on o.vnum = v.vehicle_num) join detailed_model d on v.dnum = d.detail_id) join model m on m.model_id = d.mno) join maker on maker_no = maker_id where o.buyer is not null order by order_date desc";
 
 		//out.println(sql);
 

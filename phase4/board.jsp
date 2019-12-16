@@ -12,13 +12,13 @@
 	try {
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@localhost:1600:xe";
 
 		ResultSet rs = null;
 
 		Class.forName(driverName);
 
-		Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
+		Connection con = DriverManager.getConnection(url, "nicar", "car");
 
 		Statement stmt = con.createStatement();
 
@@ -95,8 +95,6 @@
 										while (rs.next()) {
 											out.print("<a href=\"#\" onclick=\"orderDetail(" + rs.getString("order_num") + ")\">" + i++
 													+ ". " + rs.getString("Vnum") + "</a></br>");
-											if (i >= 7)
-												break;
 										}
 									} else {
 										out.print("<b>&nbsp추천 상품</b><br>");
@@ -137,34 +135,39 @@
 
 												rs = stmt.executeQuery(sql);
 												i = 1;
+												boolean result = false;
 												while (rs.next()) {
+													result = true;
 													out.print("<a href=\"#\" onclick=\"orderDetail(" + rs.getString("order_num") + ")\">"
 															+ i++ + ". " + rs.getString("Vnum") + "</a></br>");
 													if (i > 3)
 														break;
 												}
-
-												out.print("<b>&nbsp최다 판매 모델</b><br>");
-												//가장 잘 팔리는 세부모델
-												sql = "with detailList as "
-														+ "(select dnum, count(order_num) as d_count from (order_info join account on id = buyer) join vehicle on vnum = vehicle_num group by dnum), "
-														+ "maxdetail as (select dnum from detailList where d_count = (select max(d_count) from detailList))"
-														+ "select order_num, vnum from (blind_info join vehicle on vnum = vehicle_num) where dnum in (select * from maxdetail)";
-
-												System.out.println(sql);
-
-												rs = stmt.executeQuery(sql);
-												i = 1;
-												while (rs.next()) {
-													out.print("<a href=\"#\" onclick=\"orderDetail(" + rs.getString("order_num") + ")\">"
-															+ i++ + ". " + rs.getString("Vnum") + "</a></br>");
-													if (i > 3)
-														break;
+												
+												if(result==false){
+													out.print("추천 매물이 없습니다.</br>");
 												}
+											}
+											
 
+											out.print("<b>&nbsp최다 판매 모델</b><br>");
+											//가장 잘 팔리는 세부모델
+											sql = "with detailList as "
+													+ "(select dnum, count(order_num) as d_count from (order_info join account on id = buyer) join vehicle on vnum = vehicle_num group by dnum), "
+													+ "maxdetail as (select dnum from detailList where d_count = (select max(d_count) from detailList))"
+													+ "select order_num, vnum from (blind_info join vehicle on vnum = vehicle_num) where dnum in (select * from maxdetail)";
+
+											System.out.println(sql);
+
+											rs = stmt.executeQuery(sql);
+											i = 1;
+											while (rs.next()) {
+												out.print("<a href=\"#\" onclick=\"orderDetail(" + rs.getString("order_num") + ")\">"
+														+ i++ + ". " + rs.getString("Vnum") + "</a></br>");
+												if (i > 3)
+													break;
 											}
 										}
-
 									}
 							%>
 						</div>
@@ -274,13 +277,13 @@
 					try {
 						String driverName = "oracle.jdbc.driver.OracleDriver";
 
-						String url = "jdbc:oracle:thin:@localhost:1521:xe";
+						String url = "jdbc:oracle:thin:@localhost:1600:xe";
 
 						ResultSet rs = null;
 
 						Class.forName(driverName);
 
-						Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
+						Connection con = DriverManager.getConnection(url, "nicar", "car");
 
 						String sql = "";
 
