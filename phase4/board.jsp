@@ -207,8 +207,8 @@
 							<span>매물 목록</span>
 						</div>
 					</div>
-					<div class="search">
-						<form action="board.jsp" method="post" name="searchInfo">
+					<div class="search_condition">
+						<form action="board.jsp" method="post" name="search_condition">
 							차종 : <select id="category" name="category">
 								<option value="where c.ctnum is not null ">Anything</option>
 								<option value="where c.ctnum = '0' ">Light-Weight</option>
@@ -236,7 +236,15 @@
 								<option value="and c.fnum='3' ">Electric</option>
 								<option value="and c.fnum='4' ">Gasoline & Electric</option>
 								<option value="and c.fnum='6' ">Gasoline & LPG</option>
-							</select> 변속기 종류 : <select id="transmission" name="transmission">
+							</select> 배기량 : <select id="ed" name="ed">
+								<option value=" ">Anything</option>
+								<option value=" and c.enum = '0' ">1500</option>
+								<option value=" and c.enum = '1' ">2000</option>
+								<option value=" and c.enum = '2' ">2500</option>
+								<option value=" and c.enum = '3' ">3000</option>
+								<option value=" and c.enum = '4' ">4000</option>
+								<option value=" and c.enum = '5' ">5000</option>
+							</select> </br>변속기 종류 : <select id="transmission" name="transmission">
 								<option value=" ">Anything</option>
 								<option value="and c.tnum ='Auto' ">Auto</option>
 								<option value="and c.tnum ='Semi-Auto' ">Semi-Auto</option>
@@ -250,21 +258,13 @@
 								<option value="and c.cnum = '4' ">Blue</option>
 								<option value="and c.cnum = '5' ">Black & Gray</option>
 								<option value="and c.cnum = '6' ">White & Gray</option>
-							</select> 배기량 : <select id="ed" name="ed">
-								<option value=" ">Anything</option>
-								<option value=" and c.enum = '0' ">1500</option>
-								<option value=" and c.enum = '1' ">2000</option>
-								<option value=" and c.enum = '2' ">2500</option>
-								<option value=" and c.enum = '3' ">3000</option>
-								<option value=" and c.enum = '4' ">4000</option>
-								<option value=" and c.enum = '5' ">5000</option>
 							</select> 가격대 : <input type="number" name="pricemin"> ~ <input
 								type="number" name="pricemax">
 							<button class="refresh_button" onclick="gotaxi()">검색</button>
 						</form>
 					</div>
-					<div class="search">
-						<form action="board.jsp" method="post" name="searchInfo">
+					<div class="search_model">
+						<form action="board.jsp" method="post" name="search_model">
 							모델 : <input type="text" name="model">
 							<button class="refresh_button" onclick="gotaxi()">검색</button>
 						</form>
@@ -327,7 +327,6 @@
 									+ "from car_info c\n" + category + maker + fuel + transmission + color + ed + price
 									+ " order by c.price";
 						}
-						out.println(sql);
 						PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 								ResultSet.CONCUR_UPDATABLE);
 
