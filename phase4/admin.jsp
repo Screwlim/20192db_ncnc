@@ -23,6 +23,36 @@
 		Statement stmt = con.createStatement();
 %>
 <script type="text/javascript">
+	function goSalemonth() {
+		var x_ = (window.screen.width / 2) - 165;
+		var y_ = (window.screen.height / 2) - 225;
+		if (!(window.open("showMonth.jsp", "childForm",
+				"width=325, height=450 , left=" + x_ + ", top=" + y_
+						+ ", screenX=" + x_ + ", screenY=" + y_
+						+ ", resizable = no, scrollbars = no, status = no"))) {
+			return false;
+		}
+	}
+	function goSaleyear() {
+		var x_ = (window.screen.width / 2) - 165;
+		var y_ = (window.screen.height / 2) - 225;
+		if (!(window.open("showYear.jsp", "childForm",
+				"width=325, height=450 , left=" + x_ + ", top=" + y_
+						+ ", screenX=" + x_ + ", screenY=" + y_
+						+ ", resizable = no, scrollbars = no, status = no"))) {
+			return false;
+		}
+	}
+	function goSalemakers() {
+		var x_ = (window.screen.width / 2) - 165;
+		var y_ = (window.screen.height / 2) - 225;
+		if (!(window.open("showMakers.jsp", "childForm",
+				"width=325, height=450 , left=" + x_ + ", top=" + y_
+						+ ", screenX=" + x_ + ", screenY=" + y_
+						+ ", resizable = no, scrollbars = no, status = no"))) {
+			return false;
+		}
+	}
 	function goCreateboard() {
 		var x_ = (window.screen.width / 2) - 395;
 		var y_ = (window.screen.height / 2) - 260;
@@ -101,6 +131,9 @@
 								out.print(
 										"<button class=\"button3\" onclick=\"goAdmin()\"> <img src=\"realreport.png\" style=\"height: 15px\">비공개 처리 </button>");
 								out.print("<button class=\"button4\" onclick=\"goView()\">구매 내역 조회 </button>");
+								out.print("<button class=\"button4\" onclick=\"goSalemakers()\">제조사별 매출 조회 </button>");
+								out.print("<button class=\"button4\" onclick=\"goSaleyear()\">연도별 매출 조회 </button>");
+								out.print("<button class=\"button4\" onclick=\"goSalemonth()\">월별 매출 조회 </button>");
 							}
 
 							rs.close();

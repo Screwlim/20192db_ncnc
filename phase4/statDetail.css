@@ -1,0 +1,47 @@
+.entire
+{
+    background-color: whitesmoke;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.room_state
+{
+    border-radius: 5px;
+    background-color: #E4E4E4;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.room_state span
+{   
+    margin: 5px;
+    font-size: 10px;
+}
+
+.detail
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.detail div
+{
+    margin-bottom: 10px;
+}
+
+.participant_state
+{
+    border-radius: 5px;
+    background-color: #E4E4E4;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.participant_state span
+{
+    margin: 5px;
+    font-size: 10px;
+}
