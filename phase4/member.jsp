@@ -5,8 +5,8 @@
     <meta charset="EUC-KR">
     <title>NBBANG : 회원가입</title>
     <script type="text/javascript">
-    	function goTaxi(){
-    		location.href="taxi.jsp";
+    	function goFirst(){
+    		location.href="first.jsp";
     	}
     
     	//팝업창 띄우고, ID 중복 검사함.
@@ -49,29 +49,11 @@
                 return false;
             }
             
-            if(!document.userInfo.nickname.value){
-                alert("별명을 입력하세요.");
-                document.userInfo.nickname.focus();    
+            if(!document.userInfo.phone_num.value){
+                alert("휴대전화번호를 입력하세요.");
+                document.userInfo.phone_num.focus();    
                 return false;
-            }
-            
-            if(!document.userInfo.birth_yy.value){
-                alert("테어난 해를 입력하세요.");
-                document.userInfo.birth_yy.focus();    
-                return false;
-            }
-            
-            if(!document.userInfo.birth_mm.value){
-                alert("태어난 달을 입력하세요.");
-                document.userInfo.birth_mm.focus();    
-                return false;
-            }
-            
-            if(!document.userInfo.birth_dd.value){
-                alert("태어난 날을 입력하세요.");
-                document.userInfo.birth_dd.focus();    
-                return false;
-            }
+            } 
             
             if(!document.userInfo.mail.value){
                 alert("이메일주소를 입력하세요.");
@@ -79,11 +61,14 @@
                 return false;
             }
             
-            if(!document.userInfo.phone_num.value){
-                alert("휴대전화번호를 입력하세요.");
-                document.userInfo.phone_num.focus();    
+            if(!document.userInfo.address.value){
+                alert("주소을 입력하세요.");
+                document.userInfo.address.focus();    
                 return false;
             }            
+           
+            
+                       
         }
         
         // 정보를 넘겨서 데이터 베이스에 넣는 화면.
@@ -92,7 +77,7 @@
 		}
         // 취소 버튼 클릭시 로그인 화면으로 이동
         function goLogin(){
-			location.href="taxi.jsp"; //later, change location to Login page!!
+			location.href="fisrst.jsp"; //later, change location to Login page!!
 		}
     </script>
     <style>
@@ -290,8 +275,8 @@
     <div id="wrap">
         <!-- header -->
         <div id="header">
-            <h1 class="logo" onclick="goTaxi()">
-            <a href="#">NBBANG</a>
+            <h1 class="logo" onclick="goFirst()">
+            <a href="#">NCAR</a>
             </h1>
         </div>
         <!-- //header -->
@@ -299,7 +284,7 @@
         <div id="container">
             <!-- content -->
             <div id="content">
-                <h2 class="blind">N빵 회원가입</h2>
+                <h2 class="blind">NCAR 회원가입</h2>
                 <div class="join">
                 <form method="post" action="member_insert.jsp" name="userInfo" onsubmit="return checkValue()">
                     <fieldset>
@@ -324,10 +309,30 @@
                             <label for="user-name" class="blind">이름</label>
                             <input type="text" id="name" name="name" placeholder="이름" class="inp-field w458">
                         </p>
-                        <p class="field">
-                            <label for="user-name" class="blind">닉네임</label>
-                            <input type="text" id="nickname" name="nickname" placeholder="닉네임" class="inp-field w458">
+                        <p class="field confirm">
+                            <select id="user-num" title="국가번호를 선택하세요">
+                                <option value="+82">+82</option>							
+                            </select>
+                            <span class="field-wall">|</span>
+                            <input type="text" id="phone_num" name="phone_num" placeholder="휴대전화번호" title="휴대전화번호를 입력하세요" class="inp-field w205">
                         </p>
+                        <p class="field">
+                            <label for="user-email" class="blind">이메일</label>
+                            <input type="text" id="mail" name="mail" placeholder="이메일" class="inp-field w458">
+                        </p>
+                        <p class="field">
+                            <label for="user-name" class="blind">주소</label>
+                            <input type="text" id="address" name="address" placeholder="주소" class="inp-field w458">
+                        </p>
+                       
+                    </fieldset>
+                    <fieldset>
+ 						<p class="field">
+                            <label for="user-name">성별</label>
+                            <span class="field-wall">|</span>
+                            <input type='radio' name='gender' value='M' />남성  <input type='radio' name='gender' value='F' />여성  <input type='radio' name='gender' value='' checked/> 선택안함
+                        </p>                   
+                    
                         <p class="field birth">
                             <label for="user-birth">생일</label>
                             <input type="text" id="birth_yy" name="birth_yy"placeholder="년(4자)" maxlength="4" title="년도를 4자리로 입력하세요" class="inp-field w130">
@@ -348,24 +353,23 @@
                                 <option value="12">12월</option>
                             </select>
                             <span class="field-wall">|</span>
-                            <input type="text" id="birth_dd" name="birth_dd"placeholder="일" maxlength="2" title="일을 입력하세요" class="inp-field w145">
+                            <input type="text" id="birth_dd" name="birth_dd"placeholder="일" maxlength="2" title="일을 입력하세요" class="inp-field w145" min="1977-01-01" max="2019-12-31">
                         </p>
+                        
                         <p class="field">
-                            <label for="user-email" class="blind">본인확인 이메일</label>
-                            <input type="text" id="mail" name="mail" placeholder="본인확인 이메일" class="inp-field w458">
-                        </p>
+                            <label for="user-name" class="blind">직업</label>
+                            <input type="text" id="job" name="job" placeholder="직업" class="inp-field w458">
+                        </p>                
                     </fieldset>
+                    
                     <fieldset>
-                        <legend>전화번호인증</legend>
-                        <p class="field confirm">
-                            <label for="user-num" class="blind">인증번호받기</label>
-                            <select id="user-num" title="국가번호를 선택하세요">
-                                <option value="+82">+82</option>							
-                            </select>
+                        <p class="is_admin">
+                        <label for="user-name">관리자</label>
                             <span class="field-wall">|</span>
-                            <input type="text" id="phone_num" name="phone_num" placeholder="휴대전화번호" title="휴대전화번호를 입력하세요" class="inp-field w205">
+                            <input type="checkbox" name="is_admin" value="T">
                         </p>
                     </fieldset>
+                    
                     <div class="btn-area">
                         <input type="submit" value="가입하기" class="btn-submit">
                     </div>
