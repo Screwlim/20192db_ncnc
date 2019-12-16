@@ -39,8 +39,8 @@
          function goAdmin(){
             location.href="admin.jsp";   
          }
-          function goPurchase(idx){
-             location.href="CarPurchase.jsp?idx="+idx;
+          function goPurchase(idx, vnum, year, mileage, price, fnum, cnum, ctnum, _enum, tnum, dnum){
+             location.href="CarPurchase.jsp?idx="+idx+"&vnum="+vnum+"&model_year="+year+"&mileage="+mileage+"&price="+price+"&fnum="+fnum+"&cnum="+cnum+"&ctnum="+ctnum+"&enum="+_enum+"&tnum="+tnum+"&dnum="+dnum;
          }
          function goDetail(idx){
         	 var x_ = (window.screen.width/2) - 410;
@@ -52,7 +52,7 @@
          function orderDetail(idx){
         	 var x_ = (window.screen.width/2) - 410;
         	 var y_ = (window.screen.height/2) - 300;
-             if(!(window.open("boardDetail.jsp?idx="+idx+"&rd_only=1","childForm","width=820, height=600 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
+             if(!(window.open("orderDetail.jsp?idx="+idx+"&rd_only=1","childForm","width=820, height=600 , left="+x_+", top="+y_+", screenX="+x_+", screenY="+y_+", resizable = no, scrollbars = no, status = no"))){
                 return false;
              }
          }
@@ -231,7 +231,7 @@
 								<option value="and c.maker_name = 'Audi' ">Audi</option>
 								<option value="and c.maker_name = 'Porsche' ">Porsche</option>
 								<option value="and c.maker_name = 'Lamborghini' ">Lamborghini</option>
-							</select> 연료 : <select id="fuel" name="fuel">
+							</select> 연료 : <select id="fuel" name="fuel">d
 								<option value=" ">Anything</option>
 								<option value="and c.fnum='0' ">Gasoline</option>
 								<option value="and c.fnum='1' ">Diesel</option>
@@ -289,7 +289,7 @@
 
 						String model = request.getParameter("model");
 						if (model != null) {
-							sql = "Select c.vehicle_num, c.model_year, c.ctnum, c.model_name, c.detail_name, c.price, c.order_num, c.maker_name\n"
+							sql = "Select *\n"
 									+ "from car_info c\nwhere c.model_name = '" + model + "' order by c.price";
 						} else {
 							String category = request.getParameter("category");
@@ -326,7 +326,7 @@
 							}
 							String price = "and c.price > " + pricemin + " and c.price < " + pricemax;
 
-							sql = "Select c.vehicle_num, c.model_year, c.ctnum, c.model_name, c.detail_name, c.price, c.order_num, c.maker_name\n"
+							sql = "Select *\n"
 									+ "from car_info c\n" + category + maker + fuel + transmission + color + ed + price
 									+ " order by c.price";
 						}
@@ -371,7 +371,7 @@
 								</div>
 							</div>
 							<div class="join">
-								<button class="join_button" onclick="goPurchase(<%=idx%>)">
+								<button class="join_button" onclick="goPurchase(<%=idx%>, '<%=rs.getString("vehicle_num") %>', '<%=rs.getString("model_year") %>', '<%=rs.getString("mileage") %>', '<%=rs.getString("price") %>', '<%=rs.getString("fnum") %>', '<%=rs.getString("cnum") %>', '<%=rs.getString("ctnum") %>', '<%=rs.getString("enum") %>', '<%=rs.getString("tnum") %>', '<%=rs.getString("dnum") %>')">
 									+ 구매</button>
 							</div>
 						</div>
