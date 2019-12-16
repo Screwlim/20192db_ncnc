@@ -60,9 +60,8 @@
 						out.println("<script>alert('구매하셨습니다');</script>");
 					} else {
 						con.rollback();
-						out.println("<script>alert('다시 시도해주세요');</script>");
+						out.println("<script>alert('구매실패하셨습니다');</script>");
 					}
-
 				} else {
 					out.println("<script>alert('다시 시도해주세요');</script>");
 				}
