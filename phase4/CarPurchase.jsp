@@ -34,34 +34,44 @@
 		sql = "select is_admin from account where id = '" + id + "'";
 
 		rs = stmt.executeQuery(sql);
-
+		
 		if (rs.next()) {
 			if (rs.getString("is_admin").equals("T")) {
 				out.println("<script>alert('관리자는 구매가 불가능합니다');</script>");
 			} else {
+				//transcation start
+				con.commit();
+				
 				//locking
 				sql = "select * from order_info where buyer is null and order_num = " + idx + " for update";
 
-				rs = stmt.executeQuery(sql);
+				rs = stmt.executeQuery(sql);		
 
 				if (rs.next()) {
-					//transcation start
-					con.commit();
-
-					// order_info update
-					sql = "update order_info set order_date = TO_DATE( '" + inDate
-							+ "', 'YYYY/MM/DD'), Buyer = \'" + session.getAttribute("sessionID")
-							+ "\' where order_num = '" + idx + "'";
-
-					int res = stmt.executeUpdate(sql);
-
-					if (res == 1) {
-						con.commit();
-						out.println("<script>alert('구매하셨습니다');</script>");
-					} else {
+					sql = "select * from filter where order_num = " + idx + " for update";
+					
+					rs = stmt.executeQuery(sql);		
+							
+					if(rs.next()){
 						con.rollback();
-						out.println("<script>alert('구매실패하셨습니다');</script>");
+						out.println("<script>alert('허위 의심 매물입니다. 다시 시도해주세요');</script>");
+					} else{
+						// order_info update
+						sql = "update order_info set order_date = TO_DATE( '" + inDate
+								+ "', 'YYYY/MM/DD'), Buyer = \'" + session.getAttribute("sessionID")
+								+ "\' where order_num = '" + idx + "'";
+
+						int res = stmt.executeUpdate(sql);
+
+						if (res == 1) {
+							con.commit();
+							out.println("<script>alert('구매하셨습니다');</script>");
+						} else {
+							con.rollback();
+							out.println("<script>alert('구매실패하셨습니다');</script>");
+						}
 					}
+					
 				} else {
 					out.println("<script>alert('다시 시도해주세요');</script>");
 				}

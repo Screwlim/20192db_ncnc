@@ -62,6 +62,7 @@
 						out.println("<script>alert('정상적으로 처리 되었습니다.')</script>");
 					}
 				} else {
+					con.rollback();
 					out.println("<script>alert('판매중인 매물에서 일치하는 매물이 존재하지않습니다.')</script>");
 				}
 
