@@ -21,11 +21,11 @@
 	// 세션정보 가져오기
 	String driverName = "oracle.jdbc.driver.OracleDriver";
 
-	String url = "jdbc:oracle:thin:@155.230.36.61:1521:orcl";
+	String url = "jdbc:oracle:thin:@localhost:1600:xe";
 
 	Class.forName(driverName);
 
-	Connection con = DriverManager.getConnection(url, "s2015110533", "2015110533");
+	Connection con = DriverManager.getConnection(url, "nicar", "car");
 	
 	Statement stmt = con.createStatement();
 
@@ -115,7 +115,7 @@
 				<input type="text" name="job" value="<%=rs.getString(9)%>">
 			</div>
 		</div>
-
+		<br>
 		<div class="user_info" style="justify-content: flex-end;">
 			<input type="submit" value="수정">
 			<input type="button" value="뒤로 가기" onClick="goBack()">
