@@ -32,18 +32,14 @@
 	
 	try {
 
-		String serverIP = "155.230.36.61";
-		String strSID = "orcl";
-		String portNum = "1521";
-		String user = "s2015110533";
-		String pass = "2015110533";
-		String url = "jdbc:oracle:thin:@" + serverIP + ":" + portNum + ":" + strSID;
+
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 
 		
 		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		conn = DriverManager.getConnection(url, user, pass);
+		conn = DriverManager.getConnection(url, "ncnc", "ncnc");
 
 		Statement stmt = conn.createStatement(); // SQL 쿼리를 날리기위한 Statement 객체 생성
 
@@ -89,7 +85,6 @@
 		
 		out.println("<script language='javascript'>");
 		out.println("alert('올바르지 않는 수정값이 있습니다.')");
-		out.println("location.href='userInfo.jsp'");
 		out.println("</script>");
 		
 		e.printStackTrace();

@@ -70,13 +70,13 @@
 
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
-		String url = "jdbc:oracle:thin:@155.230.36.61:1521:orcl";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 		ResultSet rs = null;
 
 		Class.forName(driverName);
 
-		Connection con = DriverManager.getConnection(url, "s2015110533", "2015110533"); //url + id + pw
+		Connection con = DriverManager.getConnection(url, "ncnc", "ncnc"); //url + id + pw
 
 		con.setAutoCommit(false);
 		con.commit();

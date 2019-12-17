@@ -12,7 +12,7 @@
 	try {
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
-		String url = "jdbc:oracle:thin:@155.230.36.61:1521:orcl";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 		Statement stmt = null;
 		boolean is_admin = false;
@@ -20,7 +20,7 @@
 
 		Class.forName(driverName);
 
-		Connection con = DriverManager.getConnection(url, "s2015110533", "2015110533");
+		Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
 
 		stmt = con.createStatement();
 
@@ -40,7 +40,9 @@
 					if (rs0.getInt(1) == 1) {
 						out.println("<script language='javascript'>");
 						out.println("alert('유일한 관리자는 탈퇴를 할 수 없습니다.')");
-						out.println("location.href='first.jsp'");
+						
+						out.println("location.href='userInfo.jsp'");
+						
 						out.println("</script>");
 						rs0.close();
 					} else {
@@ -50,7 +52,10 @@
 						out.println("<script language='javascript'>");
 						out.println("alert('지금까지 저희 서비스를 이용해 주셔서 감사합니다.')");
 						session.invalidate();
-						out.println("location.href='first.jsp'");
+						
+						out.println("self.opener = self");
+						out.println("window.close()");
+						
 						out.println("</script>");
 					}
 				}
@@ -61,11 +66,12 @@
 				rs0 = stmt.executeQuery("SELECT COUNT(BUYER), COUNT(SELLER) FROM ORDER_INFO WHERE BUYER = \'"
 						+ session.getAttribute("sessionID") + "\' OR SELLER  = \'"
 						+ session.getAttribute("sessionID") + "\'");
+				
 				if (rs0.next()) {
 					if (rs0.getInt(1) > 0 || rs0.getInt(2) > 0) {
 						out.println("<script language='javascript'>");
 						out.println("alert('거래기록이 남아있습니다. 탈퇴가 불가능 합니다.')");
-						out.println("location.href='first.jsp'");
+						out.println("location.href='userInfo.jsp'");						
 						out.println("</script>");
 						rs0.close();
 
@@ -76,8 +82,12 @@
 						out.println("<script language='javascript'>");
 						out.println("alert('지금까지 저희 서비스를 이용해 주셔서 감사합니다.')");
 						session.invalidate();
-						out.println("location.href='first.jsp'");
+						
+						out.println("self.opener = self");
+						out.println("window.close()");
+						
 						out.println("</script>");
+						
 					}
 				}
 			}

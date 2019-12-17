@@ -12,13 +12,13 @@
 	try {
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
-		String url = "jdbc:oracle:thin:@localhost:1600:xe";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 		ResultSet rs = null;
 
 		Class.forName(driverName);
 
-		Connection con = DriverManager.getConnection(url, "nicar", "car");
+		Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
 
 		Statement stmt = con.createStatement();
 %>
@@ -80,7 +80,7 @@
 	function goLogout() {
 		location.href = "Logout.jsp";
 	}
-	function goTaxi() {
+	function goFirst() {
 		location.href = "first.jsp";
 	}
 	function checkValue() {
@@ -100,13 +100,13 @@
 </head>
 
 <body>
-	<img id="img" src="3.jpg">
+	<img id="img" src="background.PNG">
 	<div class="up"></div>
 	<div class="center">
 		<div class="box">
 			<div class="state">
-				<img id="gotaxi" src="5.png" style="height: 100px"
-					onclick="goTaxi()">
+				<img id="goFirst" src="N.png" style="height: 100px"
+					onclick="goFirst()">
 				<div id="user">
 					<div id="mystate">
 						<span> <img src="person.jpg"> 내 정보
@@ -128,12 +128,11 @@
 									is_admin = true;
 
 							if (is_admin) {
-								out.print(
-										"<button class=\"button3\" onclick=\"goAdmin()\"> <img src=\"realreport.png\" style=\"height: 15px\">비공개 처리 </button>");
-								out.print("<button class=\"button4\" onclick=\"goView()\">구매 내역 조회 </button>");
-								out.print("<button class=\"button4\" onclick=\"goSalemakers()\">제조사별 매출 조회 </button>");
-								out.print("<button class=\"button4\" onclick=\"goSaleyear()\">연도별 매출 조회 </button>");
-								out.print("<button class=\"button4\" onclick=\"goSalemonth()\">월별 매출 조회 </button>");
+								out.print("<button class=\"button3\" onclick=\"goAdmin()\"> <img src=\"realreport.png\" style=\"height: 15px\">비공개 처리 </button>");
+								out.print("<button class=\"button3\" onclick=\"goView()\">거래 내역 조회 </button>");
+								out.print("<button class=\"button3\" onclick=\"goSalemakers()\">제조사별 매출 조회 </button>");
+								out.print("<button class=\"button3\" onclick=\"goSaleyear()\">연도별 매출 조회 </button>");
+								out.print("<button class=\"button3\" onclick=\"goSalemonth()\">월별 매출 조회 </button>");
 							}
 
 							rs.close();

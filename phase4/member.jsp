@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="EUC-KR">
-    <title>NBBANG : 회원가입</title>
+    <title>NCAR : 회원가입</title>
     <script type="text/javascript">
     	function goFirst(){
     		location.href="first.jsp";
@@ -80,6 +80,7 @@
 			location.href="fisrst.jsp"; //later, change location to Login page!!
 		}
     </script>
+    
     <style>
         html,body{width:100%;height:100%}
         body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
@@ -106,8 +107,9 @@
         }
         #header .logo {
             width: 240px;
+            height: 120px;
             margin: 0 auto;
-            background: url(img1.gif) no-repeat 0 100%;
+            background: url(5.png) no-repeat 0 5%;
         }
         #header .logo a {
             display: block;
@@ -271,8 +273,7 @@
 
 </head>
 <body>
-    
-    <div id="wrap">
+	<div id="wrap">
         <!-- header -->
         <div id="header">
             <h1 class="logo" onclick="goFirst()">

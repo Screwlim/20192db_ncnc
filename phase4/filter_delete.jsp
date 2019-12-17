@@ -19,42 +19,35 @@
 		else{
 			String driverName = "oracle.jdbc.driver.OracleDriver";
 
-			String url = "jdbc:oracle:thin:@localhost:1600:xe";
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 			ResultSet rs = null;
 
 			Class.forName(driverName);
 
-			Connection con = DriverManager.getConnection(url, "nicar", "car"); //url + id + pw
-			
-			con.setAutoCommit(false);
+			Connection con = DriverManager.getConnection(url, "ncnc", "ncnc"); //url + id + pw
 
 		//	out.println("Oracle 데이터베이스 db에 성공적으로 접속했습니다");
 		
-			con.commit();
-		
-			String sql = "select * from filter where order_num = " + num + " for update";
+			String sql = "select * from filter where order_num = " + num;
 
 			Statement stmt = con.createStatement();
 
 			rs = stmt.executeQuery(sql);
 
 			if (!rs.next()) {
-				con.rollback();
 				out.println("<script>alert('이미 공개된 매물입니다.');</script>");
 			}
 			else{
 				
-				sql = "delete from filter where order_num = " + num;
+				sql = "select * from filter where order_num = " + num;
 				
 				int res = stmt.executeUpdate(sql);
 				
 				if(res == 0){
-					con.rollback();
 					out.println("<script>alert('비정상적으로 처리 되었습니다. 다시 확인해주세요.');</script>");
 				}
 				else{
-					con.commit();
 					out.println("<script>alert('정상적으로 처리 되었습니다.');</script>");
 				}
 			}

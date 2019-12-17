@@ -21,12 +21,12 @@
 	// 세션정보 가져오기
 	String driverName = "oracle.jdbc.driver.OracleDriver";
 
-	String url = "jdbc:oracle:thin:@localhost:1600:xe";
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 	Class.forName(driverName);
 
-	Connection con = DriverManager.getConnection(url, "nicar", "car");
-	
+	Connection con = DriverManager.getConnection(url, "ncnc", "ncnc");
+
 	Statement stmt = con.createStatement();
 
 	String sql = "SELECT * FROM ACCOUNT WHERE ID = \'" + session.getAttribute("sessionID") + "\'";
@@ -44,7 +44,8 @@
 				<label for="fname">아이디</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="user_id" value="<%=session.getAttribute("sessionID")%>" disabled>
+				<input type="text" name="user_id"
+					value="<%=session.getAttribute("sessionID")%>" disabled>
 			</div>
 		</div>
 		<div class="user_info">
@@ -104,7 +105,8 @@
 				<label for="country">생일</label>
 			</div>
 			<div class="col-75">
-				<input type="date" name="birth" min="1920-01-01" max="2019-12-31" value="<%=rs.getDate(8)%>">
+				<input type="date" name="birth" min="1920-01-01" max="2019-12-31"
+					value="<%=rs.getDate(8)%>">
 			</div>
 		</div>
 		<div class="user_info">
@@ -115,17 +117,16 @@
 				<input type="text" name="job" value="<%=rs.getString(9)%>">
 			</div>
 		</div>
-		<br>
+
 		<div class="user_info" style="justify-content: flex-end;">
-			<input type="submit" value="수정">
-			<input type="button" value="뒤로 가기" onClick="goBack()">
-			<input type="button" value="회원 탈퇴" onClick="user_delete()">
+			<input type="submit" value="수정"> <input type="button"
+				value="회원 탈퇴" onClick="user_delete()">
 		</div>
-		
-			<%
-				}
-				rs.close();
-			%>
+
+		<%
+			}
+			rs.close();
+		%>
 	</form>
 
 </body>

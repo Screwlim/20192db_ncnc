@@ -27,13 +27,13 @@
 		} else {
 			String driverName = "oracle.jdbc.driver.OracleDriver";
 
-			String url = "jdbc:oracle:thin:@localhost:1600:xe";
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 			ResultSet rs = null;
 
 			Class.forName(driverName);
 
-			Connection con = DriverManager.getConnection(url, "nicar", "car"); //url + id + pw
+			Connection con = DriverManager.getConnection(url, "ncnc", "ncnc"); //url + id + pw
 			
 			con.setAutoCommit(false);
 

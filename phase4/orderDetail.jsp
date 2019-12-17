@@ -17,13 +17,13 @@
 	try {
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 
-		String url = "jdbc:oracle:thin:@localhost:1600:xe";
+		String url = "jdbc:oracle:thin:@155.230.36.61:1521:orcl";
 
 		ResultSet rs = null;
 
 		Class.forName(driverName);
 
-		Connection con = DriverManager.getConnection(url, "nicar", "car");
+		Connection con = DriverManager.getConnection(url, "s2015110533", "2015110533");
 
 		Statement stmt = con.createStatement();
 

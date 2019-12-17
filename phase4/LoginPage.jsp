@@ -29,7 +29,7 @@
     </head>
 
     <body class="align">
-        <img id = "img" src = "background.jpg">
+        <img id = "img" src = "background.PNG">
         <div class="grid"> 
             <form action = "Login.jsp" method="post" name="loginInfo" class="form login" onsubmit="return checkValue()">
                 <header class="login__header">
